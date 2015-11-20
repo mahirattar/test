@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -47,7 +48,7 @@ public class Workflow {
 	 @Column(name = "etat", length = 50) 
 	 private String etat; 
 	 
-	 @OneToMany(fetch = FetchType.LAZY, mappedBy = "workflow")
+	 @OneToMany(fetch = FetchType.EAGER, mappedBy = "workflow",cascade = CascadeType.ALL)
 	Set<Etape> etapes;
 	 
 	 @Column(name = "description", length = 550)

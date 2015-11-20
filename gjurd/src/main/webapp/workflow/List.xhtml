@@ -58,7 +58,7 @@
 	</p:column>	
                                <f:facet name="footer">
                     <p:commandButton id="createButton" rendered='#{authentification.havePrivilege("WORKFLOW_ADD")}' icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{workflowController.prepareCreate}" update=":WorkflowCreateForm:display" oncomplete="PF('WorkflowCreateDialog').show()"/>
-                   	<p:commandButton id="graphicsButton" rendered='#{authentification.havePrivilege("WORKFLOW_EDIT")}' icon="ui-icon-plus"   value="#{bundle.Edit}" action="diagram"  ajax="false"/>
+                   	<p:commandButton id="graphicsButton" rendered='#{authentification.havePrivilege("WORKFLOW_EDIT")}' icon="ui-icon-plus"   value="#{bundle.Edit}" action="#{workflowController.viewDiagram()}"  ajax="false"/>
                    	<p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":WorkflowViewForm:display" oncomplete="PF('WorkflowViewDialog').show()" disabled="#{empty workflowController.selected}"/>
                     <p:commandButton id="editButton" rendered='#{authentification.havePrivilege("WORKFLOW_EDIT")}'   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":WorkflowEditForm:display" oncomplete="PF('WorkflowEditDialog').show()" disabled="#{empty workflowController.selected}"/>
                     <p:commandButton id="deleteButton" rendered='#{authentification.havePrivilege("WORKFLOW_DELETE")}' icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="PF('confirmation').show()" disabled="#{empty workflowController.selected}"/>

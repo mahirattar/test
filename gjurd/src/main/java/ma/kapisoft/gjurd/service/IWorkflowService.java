@@ -6,6 +6,7 @@ import ma.kapisoft.gjurd.entities.Action;
 import ma.kapisoft.gjurd.entities.Condition;
 import ma.kapisoft.gjurd.entities.Delimiteur;
 import ma.kapisoft.gjurd.entities.Workflow;
+import ma.kapisoft.gjurd.exception.GenericException;
 /**
 interface service de Workflow
 */
@@ -17,5 +18,6 @@ public interface IWorkflowService extends IService<Workflow> {
 	public void createEtatInitiale(Delimiteur etape,DefaultDiagramModel model);
 	public void createEtatFinale(Delimiteur etape,DefaultDiagramModel model);
 	 public void createCondition(Condition etape,DefaultDiagramModel model);
+	public void save(Workflow selected,DefaultDiagramModel model) throws GenericException;
 	
 }

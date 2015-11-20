@@ -56,7 +56,7 @@
 
 
                                <f:facet name="footer">
-                    <p:commandButton id="createButton" rendered='#{authentification.havePrivilege("PROFILE_ADD")}' icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{profileController.prepareCreate}" update=":ProfileCreateForm:display" oncomplete="PF('ProfileCreateDialog').show()"/>
+                    <p:commandButton id="createButton" rendered='#{authentification.havePrivilege("PROFILE_ADD")}' icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{profileController.prepareCreate2}" update=":ProfileCreateForm:display" oncomplete="PF('ProfileCreateDialog').show()"/>
                     <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ProfileViewForm:display" oncomplete="PF('ProfileViewDialog').show()" disabled="#{empty profileController.selected}"/>
                     <p:commandButton id="editButton" rendered='#{authentification.havePrivilege("PROFILE_EDIT")}'   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ProfileEditForm:display" actionListener="#{profileController.prepareEdit}" oncomplete="PF('ProfileEditDialog').show()" disabled="#{empty profileController.selected}"/>
                     <p:commandButton id="deleteButton" rendered='#{authentification.havePrivilege("PROFILE_DELETE")}' icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="PF('confirmation').show()" disabled="#{profileController.selected==null || profileController.selected.standard}"/>

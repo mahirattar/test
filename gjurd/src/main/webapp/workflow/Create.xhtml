@@ -17,7 +17,7 @@
 	<p:inputText id='nom' value='#{workflowController.selected.nom}' title='#{bundle.WorkflowLabel_nom}' required='true' requiredMessage='#{bundle.WorkflowRequiredMessage_nom}'/>
 
 	<p:outputLabel value='#{bundle.DepartementLabel_cabinet}' for='cabinet' />
-	<p:selectOneMenu id='cabinet' value='#{departementController.selected.cabinet}' converter='#{cabinetConverter}' >
+	<p:selectOneMenu id='cabinet' value='#{workflowController.selected.cabinet}' converter='#{cabinetConverter}' >
 		<f:selectItem noSelectionOption='true' itemLabel='#{bundle.SelectOneMessage}' />
 		<f:selectItems value='#{cabinetController.items}' var='item' itemValue='#{item}' itemLabel='#{item.nom}' />
 	</p:selectOneMenu>
@@ -27,7 +27,7 @@
 	<p:inputTextarea rows='2'  id='description' value='#{workflowController.selected.description}' title='#{bundle.WorkflowLabel_description}' />
 
                           </p:panelGrid>
-                    <p:commandButton actionListener="#{workflowController.test()}" value="#{bundle.Save}" update="display,:growl,:WorkflowListForm:datalist" oncomplete="if(!args.validationFailed) {PF('WorkflowCreateDialog').hide();}"/>
+                    <p:commandButton actionListener="#{workflowController.create}" value="#{bundle.Save}" update="display,:growl,:WorkflowListForm:datalist" oncomplete="if(!args.validationFailed) {PF('WorkflowCreateDialog').hide();}"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PF('WorkflowCreateDialog').hide()"/>
                 </h:panelGroup>
 

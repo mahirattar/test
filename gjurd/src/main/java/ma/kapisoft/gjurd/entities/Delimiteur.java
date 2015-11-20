@@ -45,30 +45,7 @@ public class Delimiteur extends Etape {
 		this.etape = etape;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((fin == null) ? 0 : fin.hashCode());
-		return result;
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Delimiteur other = (Delimiteur) obj;
-		if (fin == null) {
-			if (other.fin != null)
-				return false;
-		} else if (!fin.equals(other.fin))
-			return false;
-		return true;
-	}
 	
 	
 	@Override

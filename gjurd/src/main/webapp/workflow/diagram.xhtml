@@ -21,6 +21,9 @@
   <p:commandButton id="createButton2" rendered='#{authentification.havePrivilege("WORKFLOW_ADD")}' icon="ui-icon-plus"   value="#{bundle.CreateCondition}" actionListener="#{workflowController.prepareCreateCondition}" update=":WorkflowCreateConditionForm:display" oncomplete="PF('WorkflowCreateConditionDialog').show()"/>
     <p:commandButton id="createButton3" rendered='#{authentification.havePrivilege("WORKFLOW_ADD")}' icon="ui-icon-plus"   value="#{bundle.CreateEtapeFin}" action="#{workflowController.createEtapeFin}" ajax="false" />
    
+     <p:commandButton id="save" rendered='#{authentification.havePrivilege("WORKFLOW_ADD")}' icon="ui-icon-plus"   value="#{bundle.Save}" action="#{workflowController.save}" ajax="false" style="float:right" />
+  
+   
        <p:remoteCommand name="diagram_onNodeMove" actionListener="#{workflowController.onNodeMove}" />
     </h:form>
     <p:diagram id="diagram" value="#{workflowController.model}" style="height:600px" styleClass="ui-widget-content" var="el">

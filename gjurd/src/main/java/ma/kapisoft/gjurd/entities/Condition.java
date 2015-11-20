@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "condition")
+@Table(name = "etape_condition")
 @PrimaryKeyJoinColumn(name = "id")
 public class Condition extends Etape {
 
@@ -89,59 +89,7 @@ public class Condition extends Etape {
 
 	
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result
-				+ ((attribut == null) ? 0 : attribut.hashCode());
-		result = prime * result + ((etape1 == null) ? 0 : etape1.hashCode());
-		result = prime * result + ((etape2 == null) ? 0 : etape2.hashCode());
-		result = prime * result
-				+ ((operateur == null) ? 0 : operateur.hashCode());
-		result = prime * result + ((valeur == null) ? 0 : valeur.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Condition other = (Condition) obj;
-		if (attribut == null) {
-			if (other.attribut != null)
-				return false;
-		} else if (!attribut.equals(other.attribut))
-			return false;
-		if (etape1 == null) {
-			if (other.etape1 != null)
-				return false;
-		} else if (!etape1.equals(other.etape1))
-			return false;
-		if (etape2 == null) {
-			if (other.etape2 != null)
-				return false;
-		} else if (!etape2.equals(other.etape2))
-			return false;
 		
-		if (operateur == null) {
-			if (other.operateur != null)
-				return false;
-		} else if (!operateur.equals(other.operateur))
-			return false;
-		if (valeur == null) {
-			if (other.valeur != null)
-				return false;
-		} else if (!valeur.equals(other.valeur))
-			return false;
-	
-		return true;
-	}
-	
 	@Override
 	public boolean valide() {
 		// TODO Auto-generated method stub

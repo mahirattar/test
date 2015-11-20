@@ -35,7 +35,7 @@ public abstract class Etape {
 	 @Column(name = "y")
 	 private int y;
 	 
-	 @ManyToOne(fetch = FetchType.LAZY)
+	 @ManyToOne(fetch = FetchType.EAGER)
 	 @JoinColumn(name = "workflow", nullable = false)
 	 Workflow workflow;
 

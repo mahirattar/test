@@ -106,7 +106,16 @@ public class WorkflowController extends AbstractController<Workflow> {
     }
     
     
-    
+    public void save()
+    {
+    	try{
+    		service.save(this.getSelected(),model);
+    		
+    	}catch(GenericException e)
+    	{
+    		
+    	}
+    }
 
     public DefaultDiagramModel getModel() {
     	if(model==null)
@@ -355,6 +364,13 @@ public class WorkflowController extends AbstractController<Workflow> {
 	        
 	  }
 	
+	  
+	public String viewDiagram()
+	{
+		model=null;
+		return "diagram";
+	}
+	  
 	private void initDiagram()
 	{
 		  model = new DefaultDiagramModel();
@@ -458,6 +474,27 @@ public class WorkflowController extends AbstractController<Workflow> {
 	            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Connected", 
 	                    "From " + event.getSourceElement().getData()+ " To " + event.getTargetElement().getData());
 	     
+	            EtapeElement source=(EtapeElement) event.getSourceElement().getData();
+	            EtapeElement target=(EtapeElement) event.getTargetElement().getData();
+	            
+				Etape et=source.getEtape();
+				if(et instanceof Delimiteur && !((Delimiteur) et).getFin())
+				{
+					((Delimiteur)et).setEtape(target.getEtape());
+				}else if(et instanceof Action)
+				{
+					((Action)et).setEtape(target.getEtape());
+				}else if(et instanceof Condition)
+				{
+					Condition condition=(Condition)et;
+					if(event.getSourceEndPoint().getAnchor().equals(EndPointAnchor.RIGHT))
+					{
+						condition.setEtape1(target.getEtape());
+					}
+					else{
+						condition.setEtape2(target.getEtape());
+					}
+				}
 	        //   model.disconnect(findConnection(event.getSourceEndPoint(), event.getTargetEndPoint()));
 	         //  DiagramRenderer dr=new DiagramRenderer();
 	            
@@ -494,12 +531,27 @@ public class WorkflowController extends AbstractController<Workflow> {
 	 
 	 
 	    public void onDisconnect(DisconnectEvent event) {
-	        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Disconnected", 
-	                    "From " + event.getSourceElement().getData()+ " To " + event.getTargetElement().getData());
-	         
-	        FacesContext.getCurrentInstance().addMessage(null, msg);
-	         
-	        RequestContext.getCurrentInstance().update("form:msgs");
+	        EtapeElement source=(EtapeElement) event.getSourceElement().getData();
+            EtapeElement target=(EtapeElement) event.getTargetElement().getData();
+            
+			Etape et=source.getEtape();
+			if(et instanceof Delimiteur && !((Delimiteur) et).getFin())
+			{
+				((Delimiteur)et).setEtape(null);
+			}else if(et instanceof Action)
+			{
+				((Action)et).setEtape(null);
+			}else if(et instanceof Condition)
+			{
+				Condition condition=(Condition)et;
+				if(event.getSourceEndPoint().getAnchor().equals(EndPointAnchor.RIGHT))
+				{
+					condition.setEtape1(null);
+				}
+				else{
+					condition.setEtape2(null);
+				}
+			}
 	    }
 	     
 	    public void onConnectionChange(ConnectionChangeEvent event) {
@@ -509,9 +561,78 @@ public class WorkflowController extends AbstractController<Workflow> {
 	                    ", Original Target: " + event.getOriginalTargetElement().getData() + 
 	                    ", New Target: " + event.getNewTargetElement().getData());
 	         
-	        FacesContext.getCurrentInstance().addMessage(null, msg);
-	         
-	        RequestContext.getCurrentInstance().update("form:msgs");
+	      if(event.getNewSourceEndPoint().equals(event.getOriginalSourceEndPoint()))
+	      {
+	    	  EtapeElement source=(EtapeElement) event.getNewSourceElement().getData();
+	            EtapeElement target=(EtapeElement) event.getNewTargetElement().getData();
+	            
+				Etape et=source.getEtape();
+				if(et instanceof Delimiteur && !((Delimiteur) et).getFin())
+				{
+					((Delimiteur)et).setEtape(target.getEtape());
+				}else if(et instanceof Action)
+				{
+					((Action)et).setEtape(target.getEtape());
+				}else if(et instanceof Condition)
+				{
+					Condition condition=(Condition)et;
+					if(event.getNewSourceEndPoint().getAnchor().equals(EndPointAnchor.RIGHT))
+					{
+						condition.setEtape1(target.getEtape());
+					}
+					else{
+						condition.setEtape2(target.getEtape());
+					}
+				}
+	      }else
+	      {
+	    	  EtapeElement source=(EtapeElement) event.getNewSourceElement().getData();
+	    	  EtapeElement source2=(EtapeElement) event.getOriginalSourceElement().getData();
+	            EtapeElement target=(EtapeElement) event.getNewTargetElement().getData();
+	            
+	            Etape et=source2.getEtape();
+				if(et instanceof Delimiteur && !((Delimiteur) et).getFin())
+				{
+					((Delimiteur)et).setEtape(null);
+				}else if(et instanceof Action)
+				{
+					((Action)et).setEtape(null);
+				}else if(et instanceof Condition)
+				{
+					Condition condition=(Condition)et;
+					if(event.getOriginalSourceEndPoint().getAnchor().equals(EndPointAnchor.RIGHT))
+					{
+						condition.setEtape1(null);
+					}
+					else{
+						condition.setEtape2(null);
+					}
+				}
+	            
+	            
+	            
+	            
+	            
+	            
+				et=source.getEtape();
+				if(et instanceof Delimiteur && !((Delimiteur) et).getFin())
+				{
+					((Delimiteur)et).setEtape(target.getEtape());
+				}else if(et instanceof Action)
+				{
+					((Action)et).setEtape(target.getEtape());
+				}else if(et instanceof Condition)
+				{
+					Condition condition=(Condition)et;
+					if(event.getNewSourceEndPoint().getAnchor().equals(EndPointAnchor.RIGHT))
+					{
+						condition.setEtape1(target.getEtape());
+					}
+					else{
+						condition.setEtape2(target.getEtape());
+					}
+				}
+	      }
 	      
 	    }
 	

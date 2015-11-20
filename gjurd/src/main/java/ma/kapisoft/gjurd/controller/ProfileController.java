@@ -46,11 +46,7 @@ public class ProfileController extends AbstractController<Profile> {
         super(Profile.class);
     }
 
-    @PostConstruct
-    public void init() {
-    
    
-    }
 
     
     
@@ -77,8 +73,8 @@ public class ProfileController extends AbstractController<Profile> {
 	public void setPrevileges(DualListModel<Previlege> previleges) {
 		this.previleges = previleges;
 	}
-	@Override
-	public Profile prepareCreate(ActionEvent event) {
+	
+	public Profile prepareCreate2(ActionEvent event) {
         List<Previlege> pSource = application.getPrevileges(); 
         List<Previlege> pTarget = new ArrayList<Previlege>();  
         previleges=new DualListModel<Previlege>(pSource, pTarget);
@@ -91,8 +87,6 @@ public class ProfileController extends AbstractController<Profile> {
         List<Previlege> pTarget = getSelected().getPrevileges();
         pSource.removeAll(pTarget);
         previleges=new DualListModel<Previlege>(pSource, pTarget);
-        
-     
     }
     public void edit(ActionEvent event) {
     	this.getSelected().setPrevileges(previleges.getTarget());
