@@ -1,0 +1,8 @@
+public ##ENTITY## findBy##CAPITALATTRIBUTE##(String ##ATTRIBUTE##) {
+		// TODO Auto-generated method stub
+		log.debug("getting get##ENTITY## instance with ##ATTRIBUTE##: " + ##ATTRIBUTE##);
+		List<##ENTITY##> list  = getSessionFactory().getCurrentSession().createQuery("SELECT o from ##ENTITY## o WHERE o.##ATTRIBUTE##=:p").setParameter("p", ##ATTRIBUTE##).list();
+		if(list.size()>0)
+			return list.get(0);
+		return null;
+	}	

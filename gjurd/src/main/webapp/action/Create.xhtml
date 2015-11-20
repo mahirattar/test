@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+
+        <p:dialog id="ActionCreateDialog" widgetVar="ActionCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.CreateActionTitle}">
+
+            <h:form id="ActionCreateForm">
+			   <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{actionController.selected != null}">
+						
+	<p:outputLabel value='#{bundle.ActionLabel_nom}' for='nom' />
+	<p:inputText id='nom' value='#{actionController.selected.nom}' title='#{bundle.ActionLabel_nom}' required='true' requiredMessage='#{bundle.ActionRequiredMessage_nom}'/>
+
+
+	<p:outputLabel value='#{bundle.ActionLabel_description}' for='description' />
+	<p:inputTextarea rows='2'  id='description' value='#{actionController.selected.description}' title='#{bundle.ActionLabel_description}' />
+	<p:outputLabel value='#{bundle.ActionLabel_description}' for='description' />
+	<p:inputText id='description' value='#{actionController.selected.description}' title='#{bundle.ActionLabel_description}' />
+
+
+	<p:outputLabel value='#{bundle.ActionLabel_service}' for='service' />
+	<p:selectOneMenu id='service' value='#{actionController.selected.service}' converter='#{departementConverter}' >
+		<f:selectItem noSelectionOption='true' itemLabel='#{bundle.SelectOneMessage}' />
+		<f:selectItems value='#{departementController.items}' var='item' itemValue='#{item}' itemLabel='#{item.libelle}' />
+	</p:selectOneMenu>
+
+
+	<p:outputLabel value='#{bundle.ActionLabel_profile}' for='profile' />
+	<p:selectOneMenu id='profile' value='#{actionController.selected.profile}' converter='#{profileConverter}' >
+		<f:selectItem noSelectionOption='true' itemLabel='#{bundle.SelectOneMessage}' />
+		<f:selectItems value='#{profileController.items}' var='item' itemValue='#{item}' itemLabel='#{item.libelle}' />
+	</p:selectOneMenu>
+
+
+	<p:outputLabel value='#{bundle.ActionLabel_etape}' for='etape' />
+	<p:selectOneMenu id='etape' value='#{actionController.selected.etape}' converter='#{etapeConverter}' >
+		<f:selectItem noSelectionOption='true' itemLabel='#{bundle.SelectOneMessage}' />
+		<f:selectItems value='#{etapeController.items}' var='item' itemValue='#{item}' itemLabel='#{item.libelle}' />
+	</p:selectOneMenu>
+
+	
+                          </p:panelGrid>
+                    <p:commandButton actionListener="#{actionController.create}" value="#{bundle.Save}" update="display,:growl,:ActionListForm:datalist" oncomplete="if(!args.validationFailed) {PF('ActionCreateDialog').hide();}"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('ActionCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

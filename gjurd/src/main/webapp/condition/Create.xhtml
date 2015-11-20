@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+
+        <p:dialog id="ConditionCreateDialog" widgetVar="ConditionCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.CreateConditionTitle}">
+
+            <h:form id="ConditionCreateForm">
+			   <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{conditionController.selected != null}">
+						
+	<p:outputLabel value='#{bundle.ConditionLabel_attribut}' for='attribut' />
+	<p:inputText id='attribut' value='#{conditionController.selected.attribut}' title='#{bundle.ConditionLabel_attribut}' />
+
+
+	<p:outputLabel value='#{bundle.ConditionLabel_operateur}' for='operateur' />
+	<p:inputText id='operateur' value='#{conditionController.selected.operateur}' title='#{bundle.ConditionLabel_operateur}' />
+
+
+	<p:outputLabel value='#{bundle.ConditionLabel_valeur1}' for='valeur1' />
+	<p:inputText id='valeur1' value='#{conditionController.selected.valeur1}' title='#{bundle.ConditionLabel_valeur1}' />
+
+
+	<p:outputLabel value='#{bundle.ConditionLabel_valeur2}' for='valeur2' />
+	<p:inputText id='valeur2' value='#{conditionController.selected.valeur2}' title='#{bundle.ConditionLabel_valeur2}' />
+
+
+	<p:outputLabel value='#{bundle.ConditionLabel_etape1}' for='etape1' />
+	<p:selectOneMenu id='etape1' value='#{conditionController.selected.etape1}' converter='#{etapeConverter}' >
+		<f:selectItem noSelectionOption='true' itemLabel='#{bundle.SelectOneMessage}' />
+		<f:selectItems value='#{etapeController.items}' var='item' itemValue='#{item}' itemLabel='#{item.libelle}' />
+	</p:selectOneMenu>
+
+
+	<p:outputLabel value='#{bundle.ConditionLabel_etape2}' for='etape2' />
+	<p:selectOneMenu id='etape2' value='#{conditionController.selected.etape2}' converter='#{etapeConverter}' >
+		<f:selectItem noSelectionOption='true' itemLabel='#{bundle.SelectOneMessage}' />
+		<f:selectItems value='#{etapeController.items}' var='item' itemValue='#{item}' itemLabel='#{item.libelle}' />
+	</p:selectOneMenu>
+
+
+	<p:outputLabel value='#{bundle.ConditionLabel_etape3}' for='etape3' />
+	<p:selectOneMenu id='etape3' value='#{conditionController.selected.etape3}' converter='#{etapeConverter}' >
+		<f:selectItem noSelectionOption='true' itemLabel='#{bundle.SelectOneMessage}' />
+		<f:selectItems value='#{etapeController.items}' var='item' itemValue='#{item}' itemLabel='#{item.libelle}' />
+	</p:selectOneMenu>
+
+	
+                          </p:panelGrid>
+                    <p:commandButton actionListener="#{conditionController.create}" value="#{bundle.Save}" update="display,:growl,:ConditionListForm:datalist" oncomplete="if(!args.validationFailed) {PF('ConditionCreateDialog').hide();}"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('ConditionCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

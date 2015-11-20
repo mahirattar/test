@@ -1,0 +1,9 @@
+ <ui:insert name="menuutilisateur"> 
+            <h:panelGroup rendered='#{authentification.havePrivilege("UTILISATEUR_READ")}' >	       
+			<li ><a href="#">Utilisateur</a>
+				<ul>
+				     <li><h:commandLink action="/utilisateur/index" value="Utilisateurs"/></li> 		
+                                                     	</ul>
+			</li>
+			</h:panelGroup>
+                          </ui:insert>  

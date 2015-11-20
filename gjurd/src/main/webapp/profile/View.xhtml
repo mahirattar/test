@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProfileViewDlg" widgetVar="ProfileViewDialog"  modal="true" resizable="false" appendToBody="true" header="#{bundle.ViewProfileTitle}">
+
+            <h:form id="ProfileViewForm">
+		        <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{profileController.selected != null}">
+                    <p:outputLabel value='#{bundle.ProfileLabel_libelle}:' />
+<h:outputText value='#{profileController.selected.libelle}' title='#{bundle.ProfileLabel_libelle}'/><p:outputLabel value='#{bundle.ProfileLabel_descrition}:' />
+<h:outputText value='#{profileController.selected.descrition}' title='#{bundle.ProfileLabel_descrition}'/>
+
+<p:outputLabel value='#{bundle.ProfileLabel_standard}:' />
+		<h:panelGroup>
+			<h:outputText value='#{bundle.Yes}' rendered='#{profileController.selected.standard}'/>
+			<h:outputText value='#{bundle.No}' rendered='#{profileController.selected.standard == false}'/>
+    </h:panelGroup>
+
+	<p:outputLabel value='#{bundle.ProfileLabel_haveuser}:' />
+	<h:panelGroup>
+			<h:outputText value='#{bundle.Yes}' rendered='#{profileController.selected.haveuser}'/>
+			<h:outputText value='#{bundle.No}' rendered='#{profileController.selected.haveuser == false}'/>
+  </h:panelGroup>
+
+
+
+
+		         </p:panelGrid>
+		         <u><p:outputLabel value='#{bundle.ProfileLabel_previleges}:' style='font-weight: bold;font-style: oblique;'/></u> 
+		         <p:dataGrid var="p" style="width:800px;" value="#{profileController.selected.previleges}" columns="4" layout="grid"
+         id="p">
+ 
+    		<h:outputText rendered='#{p.type.equals("WRITE")}' value='#{p.nom}' title='#{p.description}' style="color:darkcyan"/>
+    		<h:outputText rendered='#{p.type.equals("READ")}' value='#{p.nom}' title='#{p.description}' style="color:black"/>
+    		<h:outputText rendered='#{p.type.equals("ADD")}' value='#{p.nom}' title='#{p.description}' style="color:blue"/>
+    		<h:outputText rendered='#{p.type.equals("EDIT")}' value='#{p.nom}' title='#{p.description}' style="color:green"/>
+    		<h:outputText rendered='#{p.type.equals("DELETE")}' value='#{p.nom}' title='#{p.description}' style="color:red"/>
+       
+    </p:dataGrid>
+		         
+                    <p:commandButton value="#{bundle.Close}" onclick="ProfileViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

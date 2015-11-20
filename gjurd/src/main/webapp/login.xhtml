@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+ <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+  <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/images/logog.png"/> 
+         <h:outputStylesheet  name="css/fancybox.css"/>
+         <h:outputStylesheet name="css/jquery.ui.css"/>
+          <h:outputStylesheet  name="css/reset.css"/>
+         <h:outputStylesheet name="css/screen.css"/>
+         <h:outputStylesheet  name="css/visualize-light.css"/>
+         <h:outputStylesheet name="css/visualize.css"/>
+<title>Connexion</title>
+</h:head>
+
+<h:body class="no-side">
+
+<div class="login-box">
+<div class="login-border">
+<div class="login-style">
+	<div class="login-header">
+		<div class="logo clear">
+                   
+			<span class="title" style=" text-align: center; /* margin-left: -33px; */ width: 556px;">Royaume du Maroc</span>
+                        <span class="text" style="font-size: 24px;margin-left: 8px;margin-top: 5px;text-align: center;width: 556px;">Bonjour !!!!!!!!!!!!!!</span>
+		</div>
+	</div>
+	<form action="#{request.contextPath}/j_spring_security_check" method="post">
+		<div class="login-inside" style=" margin-left: 46px; ">
+		 <h:graphicImage url="/resources/images/logog.png" alt="" width="102" height="139" style=" float: left; margin-top: 11px; margin-left: 13px; "  class="picture"/>
+		
+			<div class="login-data" style=" margin-left: 122px; ">
+			
+				<div class="row clear" style=" height: 37px; ">
+			        <h:outputLabel for="j_username" value="Login" /> 
+                                <h:inputText id="j_username" size="25" class="text" />
+                                
+                                </div>
+ 				<div class="row clear" style=" height: 37px; ">
+			       <h:outputLabel for="j_password" value="Mot de passe" /> 
+                                <h:inputSecret id="j_password" size="25" class="text"/> 
+                                </div>
+                             <h:commandButton id="submit" class="submit" value="Envoyer"/> 
+                	</div>
+				<h:panelGroup rendered="#{!param['logout'] and !param['erreur']}">
+				<p>Cliquer sur Envoyer pour se connecter </p>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{param['logout']}"><p style="color: red;">Vous avez été déconnecté. </p></h:panelGroup>
+			<h:panelGroup rendered="#{param['erreur']}"><p style="color: red;">Login ou mot de passe incorrect </p></h:panelGroup>
+
+		</div>
+		<div class="login-footer clear">
+			
+                 
+                   
+		</div>
+	</form>
+
+</div>
+</div>
+</div>
+
+</h:body>
+
+</html>

@@ -1,0 +1,9 @@
+ <ui:insert name="menudelimiteur"> 
+            <h:panelGroup rendered='#{authentification.havePrivilege("DELIMITEUR_READ")}' >	       
+			<li ><a href="#">Delimiteur</a>
+				<ul>
+				     <li><h:commandLink action="/delimiteur/index" value="Delimiteurs"/></li> 		
+                                                     	</ul>
+			</li>
+			</h:panelGroup>
+                          </ui:insert>  

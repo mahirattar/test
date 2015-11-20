@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EtapeViewDlg" widgetVar="EtapeViewDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.ViewEtapeTitle}">
+
+            <h:form id="EtapeViewForm">
+		        <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{etapeController.selected != null}">
+                    
+	<p:outputLabel value='#{bundle.EtapeLabel_cabinet}:' />
+	<h:outputText value='#{etapeController.selected.cabinet.nom}' title='#{bundle.EtapeLabel_cabinet}'/>
+
+	<p:outputLabel value='#{bundle.EtapeLabel_x}:' />
+	<h:outputText value='#{etapeController.selected.x}' title='#{bundle.EtapeLabel_x}'/>
+
+	<p:outputLabel value='#{bundle.EtapeLabel_y}:' />
+	<h:outputText value='#{etapeController.selected.y}' title='#{bundle.EtapeLabel_y}'/>
+
+	<p:outputLabel value='#{bundle.EtapeLabel_workflow}:' />
+	<h:outputText value='#{etapeController.selected.workflow.libelle}' title='#{bundle.EtapeLabel_workflow}'/>
+
+		         </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EtapeViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

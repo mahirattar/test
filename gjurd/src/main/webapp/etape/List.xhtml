@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="EtapeListForm">
+		  <p:panel header="#{bundle.ListEtapeTitle}">
+
+         
+
+            <p:dataTable id="datalist" value="#{etapeController.items}" var="item"
+                         selectionMode="single" selection="#{etapeController.selected}"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="15"
+                          paginatorPosition="bottom"
+                          emptyMessage="#{bundle.ListEtapeEmpty}"
+                        
+                         >
+
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                                    	<p:column sortBy='#{item.cabinet.nom}' filterBy='#{item.cabinet.nom}'>
+		<f:facet name='header'>
+			<h:outputText value='#{bundle.EtapeLabel_cabinet}:' />
+		</f:facet>
+			<h:outputText value='#{item.cabinet.nom}'/>
+	</p:column>	<p:column sortBy='#{item.x}' filterBy='#{item.x}'>
+		<f:facet name='header'>
+			<h:outputText value='#{bundle.EtapeLabel_x}:' />
+		</f:facet>
+			<h:outputText value='#{item.x}'/>
+	</p:column>	<p:column sortBy='#{item.y}' filterBy='#{item.y}'>
+		<f:facet name='header'>
+			<h:outputText value='#{bundle.EtapeLabel_y}:' />
+		</f:facet>
+			<h:outputText value='#{item.y}'/>
+	</p:column>	<p:column sortBy='#{item.workflow.libelle}' filterBy='#{item.workflow.libelle}'>
+		<f:facet name='header'>
+			<h:outputText value='#{bundle.EtapeLabel_workflow}:' />
+		</f:facet>
+			<h:outputText value='#{item.workflow.libelle}'/>
+	</p:column>
+                               <f:facet name="footer">
+                    <p:commandButton id="createButton" rendered='#{authentification.havePrivilege("ETAPE_ADD")}' icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{etapeController.prepareCreate}" update=":EtapeCreateForm:display" oncomplete="PF('EtapeCreateDialog').show()"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":EtapeViewForm:display" oncomplete="PF('EtapeViewDialog').show()" disabled="#{empty etapeController.selected}"/>
+                    <p:commandButton id="editButton" rendered='#{authentification.havePrivilege("ETAPE_EDIT")}'   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":EtapeEditForm:display" oncomplete="PF('EtapeEditDialog').show()" disabled="#{empty etapeController.selected}"/>
+                    <p:commandButton id="deleteButton" rendered='#{authentification.havePrivilege("ETAPE_DELETE")}' icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="PF('confirmation').show()" disabled="#{empty etapeController.selected}"/>
+                    <p:commandButton id="refreshButton" icon="ui-icon-refresh"  value="#{bundle.Refresh}" actionListener="#{etapeController.initList()}" update="datalist"/>
+                   </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+<p:confirmDialog id="confirmDialog" rendered='#{authentification.havePrivilege("ETAPE_DELETE")}' message="#{bundle.EtapeConfirmDelete}"  
+                header="#{bundle.ConfirmTitle}" severity="alert" widgetVar="confirmation">  
+                <div style="text-align: center;margin-top:10px;margin-bottom:10px;">  
+        <p:commandButton id="confirm" value="#{bundle.Yes}" actionListener="#{etapeController.delete}" oncomplete="PF('confirmation').hide()"
+                    update=":growl,datalist" />  
+        <p:commandButton id="decline" value="#{bundle.No}" onclick="PF('confirmation').hide()" type="button" /> 
+        </div>  
+                  
+    </p:confirmDialog> 
+    </h:form>
+
+</ui:composition>

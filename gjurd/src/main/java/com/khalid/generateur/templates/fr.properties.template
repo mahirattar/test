@@ -1,0 +1,24 @@
+CREATE_SUCCESS=##ENTITE##CreateSucess=##ENTITE## Ajouté avec succès.
+CREATE_ERROR=##ENTITE##CreateError=Erreur lors de l'ajout
+
+Edit_SUCCESS=##ENTITE##EditSucess=##ENTITE## Modifié avec succès.
+Edit_ERROR=##ENTITE##EditError=Erreur lors de la modification.
+
+Delete_SUCCESS=##ENTITE##DeleteSucess=##ENTITE## Supprimé avec succès.
+Delete_ERROR=##ENTITE##DeleteError=Erreur lors de la suppression
+Delete_CONFIRM=##ENTITE##ConfirmDelete=Voulez vraiment supprimer le ##ENTITE_MINISCULE##
+
+TITLE=##ENTITE##Title=Gestion des ##ENTITE_MINISCULE##s
+
+LIST_TITLE=List##ENTITE##Title=Liste des ##ENTITE_MINISCULE##s
+LIST_EMPTY=List##ENTITE##Empty=(Aucun élément trouvé dans la base de données)
+
+CREATE_TITLE=Create##ENTITE##Title=Ajouter un ##ENTITE_MINISCULE##
+
+EDIT_TITLE=Edit##ENTITE##Title=Modifier un ##ENTITE_MINISCULE##
+
+VIEW_TITLE=View##ENTITE##Title=Consulter un ##ENTITE_MINISCULE##
+
+ATTRIBUTE_LABEL=##ENTITE##Label_##ATTRIBUT##=##ATTRIBUT_CAPITAL##
+
+ATTRIBUTE_REQUIRED=##ENTITE##RequiredMessage_##ATTRIBUT##=* Champ obligatoire: ##ATTRIBUT_CAPITAL##.

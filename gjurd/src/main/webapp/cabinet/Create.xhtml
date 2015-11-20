@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+
+        <p:dialog id="CabinetCreateDialog" widgetVar="CabinetCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.CreateCabinetTitle}">
+
+            <h:form id="CabinetCreateForm">
+			   <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cabinetController.selected != null}">
+						
+	<p:outputLabel value='#{bundle.CabinetLabel_nom}' for='nom' />
+	<p:inputText id='nom' value='#{cabinetController.selected.nom}' title='#{bundle.CabinetLabel_nom}' required='true' requiredMessage='#{bundle.CabinetRequiredMessage_nom}'/>
+
+
+	<p:outputLabel value='#{bundle.CabinetLabel_description}' for='description' />
+	<p:inputTextarea rows='2'  id='description' value='#{cabinetController.selected.description}' title='#{bundle.CabinetLabel_description}' />
+
+
+	<p:outputLabel value='#{bundle.CabinetLabel_email}' for='email' />
+	<p:inputText id='email' value='#{cabinetController.selected.email}' title='#{bundle.CabinetLabel_email}' />
+
+
+	<p:outputLabel value='#{bundle.CabinetLabel_tel}' for='tel' />
+	<p:inputText id='tel' value='#{cabinetController.selected.tel}' title='#{bundle.CabinetLabel_tel}' />
+
+
+	<p:outputLabel value='#{bundle.CabinetLabel_contact}' for='contact' />
+	<p:inputText id='contact' value='#{cabinetController.selected.contact}' title='#{bundle.CabinetLabel_contact}' />
+
+	
+                          </p:panelGrid>
+                    <p:commandButton actionListener="#{cabinetController.create}" value="#{bundle.Save}" update="display,:growl,:CabinetListForm:datalist" oncomplete="if(!args.validationFailed) {PF('CabinetCreateDialog').hide();}"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('CabinetCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

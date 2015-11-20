@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+
+        <p:dialog id="DepartementCreateDialog" widgetVar="DepartementCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.CreateDepartementTitle}">
+
+            <h:form id="DepartementCreateForm">
+			   <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{departementController.selected != null}">
+						
+	<p:outputLabel value='#{bundle.DepartementLabel_nom}' for='nom' />
+	<p:inputText id='nom' value='#{departementController.selected.nom}' title='#{bundle.DepartementLabel_nom}' required='true' requiredMessage='#{bundle.DepartementRequiredMessage_nom}'/>
+
+
+	<p:outputLabel value='#{bundle.DepartementLabel_description}' for='description' />
+	<p:inputTextarea rows='2'  id='description' value='#{departementController.selected.description}' title='#{bundle.DepartementLabel_description}' />
+	
+
+	<p:outputLabel value='#{bundle.DepartementLabel_responsable}' for='responsable' />
+	<p:selectOneMenu id='responsable' value='#{departementController.selected.responsable}' converter='#{utilisateurConverter}' >
+		<f:selectItem noSelectionOption='true' itemLabel='#{bundle.SelectOneMessage}' />
+		<f:selectItems value='#{utilisateurController.items}' var='item' itemValue='#{item}' itemLabel='#{item.libelle}' />
+	</p:selectOneMenu>
+
+
+	<p:outputLabel value='#{bundle.DepartementLabel_cabinet}' for='cabinet' />
+	<p:selectOneMenu id='cabinet' value='#{departementController.selected.cabinet}' converter='#{cabinetConverter}' >
+		<f:selectItem noSelectionOption='true' itemLabel='#{bundle.SelectOneMessage}' />
+		<f:selectItems value='#{cabinetController.items}' var='item' itemValue='#{item}' itemLabel='#{item.nom}' />
+	</p:selectOneMenu>
+
+	
+                          </p:panelGrid>
+                    <p:commandButton actionListener="#{departementController.create}" value="#{bundle.Save}" update="display,:growl,:DepartementListForm:datalist" oncomplete="if(!args.validationFailed) {PF('DepartementCreateDialog').hide();}"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('DepartementCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

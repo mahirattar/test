@@ -1,0 +1,9 @@
+package ##PACKAGE##;
+
+import ##ENTITY_PACKAGE##;
+/**
+interface service de ##ENTITY##
+*/
+public interface I##SERVICE## extends IService<##ENTITY##> {
+
+}

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/divs/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.WorkflowTitle}"/>
+    </ui:define>
+
+    <ui:define name="body">
+<p:growl id="growl" life="3000"/>
+       <h:panelGroup rendered='#{authentification.havePrivilege("WORKFLOW_ADD")}' >	
+     		<ui:include src="CreateAction.xhtml"/>
+     			<ui:include src="CreateCondition.xhtml"/>
+     				<ui:include src="CreateEtapeFin.xhtml"/>
+     	  </h:panelGroup>	 
+ 	 <h:form>
+ 	<p:commandButton id="createButton" rendered='#{authentification.havePrivilege("WORKFLOW_ADD")}' icon="ui-icon-plus"   value="#{bundle.CreateAction}" actionListener="#{workflowController.prepareCreateAction}" update=":WorkflowCreateActionForm:display" oncomplete="PF('WorkflowCreateActionDialog').show()"/>
+  <p:commandButton id="createButton2" rendered='#{authentification.havePrivilege("WORKFLOW_ADD")}' icon="ui-icon-plus"   value="#{bundle.CreateCondition}" actionListener="#{workflowController.prepareCreateCondition}" update=":WorkflowCreateConditionForm:display" oncomplete="PF('WorkflowCreateConditionDialog').show()"/>
+    <p:commandButton id="createButton3" rendered='#{authentification.havePrivilege("WORKFLOW_ADD")}' icon="ui-icon-plus"   value="#{bundle.CreateEtapeFin}" action="#{workflowController.createEtapeFin}" ajax="false" />
+   
+       <p:remoteCommand name="diagram_onNodeMove" actionListener="#{workflowController.onNodeMove}" />
+    </h:form>
+    <p:diagram id="diagram" value="#{workflowController.model}" style="height:600px" styleClass="ui-widget-content" var="el">
+  		<f:facet name="element">
+  			 <div onmouseleave="node_onMouseOut(this)">
+	            <h:outputText value="#{el.name}" rendered='#{el.haveimage==false}' />
+	            <p:graphicImage url="/resources/images/#{el.image}" rendered='#{el.haveimage}' />
+	            </div>
+        </f:facet>
+        <p:ajax event="connect" listener="#{workflowController.onConnect}" />
+        <p:ajax event="disconnect" listener="#{workflowController.onDisconnect}" />
+        <p:ajax event="connectionChange" listener="#{workflowController.onConnectionChange}" />
+ 
+    </p:diagram>
+ 
+ 
+
+<style type="text/css">
+    .ui-diagram-element {   
+   /*      width: 20em;
+    height: 5em;
+    line-height: 5em;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 5em;
+    border: 1px solid #404a4e;
+    background-color: #e17009;
+    color: #222222;*/
+    }
+      .classcondition {   
+      
+    }
+    .classetatinitiale {   
+      
+    }
+     .classetatfinale {   
+      
+    }
+     .classaction {   
+      width: 20em;
+    height: 5em;
+    line-height: 5em;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 5em;
+    border: 1px solid #404a4e;
+    background-color: #e17009;
+    color: #222222;
+    }
+ 
+    .ui-diagram-element:hover {
+        background-color: #a6c9e2;
+    }
+</style>
+
+<script>
+function node_onMouseOut(nodeElement) {
+	   var parent = nodeElement.parentElement;
+	   diagram_onNodeMove([
+	{name : 'node_id', value : parent.id},
+	{name : 'node_x', value : parent.style['left']},
+	{name : 'node_y',value : parent.style['top']}
+	       ]);
+	}
+
+</script>
+
+    </ui:define>
+
+</ui:composition>
+ 

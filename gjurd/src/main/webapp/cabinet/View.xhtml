@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CabinetViewDlg" widgetVar="CabinetViewDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.ViewCabinetTitle}">
+
+            <h:form id="CabinetViewForm">
+		        <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cabinetController.selected != null}">
+                    
+	<p:outputLabel value='#{bundle.CabinetLabel_nom}:' />
+	<h:outputText value='#{cabinetController.selected.nom}' title='#{bundle.CabinetLabel_nom}'/>
+
+	<p:outputLabel value='#{bundle.CabinetLabel_description}:' />
+	<h:outputText value='#{cabinetController.selected.description}' title='#{bundle.CabinetLabel_description}'/>
+
+	<p:outputLabel value='#{bundle.CabinetLabel_email}:' />
+	<h:outputText value='#{cabinetController.selected.email}' title='#{bundle.CabinetLabel_email}'/>
+
+	<p:outputLabel value='#{bundle.CabinetLabel_tel}:' />
+	<h:outputText value='#{cabinetController.selected.tel}' title='#{bundle.CabinetLabel_tel}'/>
+
+	<p:outputLabel value='#{bundle.CabinetLabel_contact}:' />
+	<h:outputText value='#{cabinetController.selected.contact}' title='#{bundle.CabinetLabel_contact}'/>
+
+		         </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CabinetViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

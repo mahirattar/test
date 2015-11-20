@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="CompteUtilisateurListForm">
+		  <p:panel header="#{bundle.ListCompteUtilisateurTitle}">
+
+         
+
+            <p:dataTable id="datalist" value="#{compteUtilisateurController.items}" var="item"
+                         selectionMode="single" selection="#{compteUtilisateurController.selected}"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="15"
+                          paginatorPosition="bottom"
+                          emptyMessage="#{bundle.ListCompteUtilisateurEmpty}"
+                        
+                         >
+
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton editButton2 deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton editButton2  deleteButton"/>
+                                    <p:column sortBy='#{item.login}' filterBy='#{item.login}'>
+<f:facet name='header'>
+<h:outputText value='#{bundle.CompteUtilisateurLabel_login}:' />
+</f:facet>
+ <h:outputText value='#{item.login}'/>
+</p:column>
+<p:column sortBy='#{item.actif}' filterBy='#{item.actif}'>
+<f:facet name='header'>
+<h:outputText value='#{bundle.CompteUtilisateurLabel_actif}:' />
+</f:facet>
+  <h:outputText value='#{bundle.Yes}' rendered='#{item.actif}'/>
+ <h:outputText value='#{bundle.No}' rendered='#{item.actif == false}'/>
+		
+</p:column>
+
+<p:column sortBy='#{item.datepassword}' filterBy='#{item.datepassword}'>
+<f:facet name='header'>
+<h:outputText value='#{bundle.CompteUtilisateurLabel_datepassword}:' />
+</f:facet>
+ <h:outputText value='#{item.datepassword}'> <f:convertDateTime locale='#{changeLocale.locale}' pattern='dd/MM/yyyy'/></h:outputText>
+</p:column><p:column sortBy='#{item.utilisateur.libelle}' filterBy='#{item.utilisateur.libelle}'>
+<f:facet name='header'>
+<h:outputText value='#{bundle.CompteUtilisateurLabel_utilisateur}:' />
+</f:facet>
+ <h:outputText value='#{item.utilisateur.libelle}'/>
+</p:column><p:column sortBy='#{item.profile.libelle}' filterBy='#{item.profile.libelle}'>
+<f:facet name='header'>
+<h:outputText value='#{bundle.CompteUtilisateurLabel_profile}:' />
+</f:facet>
+ <h:outputText value='#{item.profile.libelle}'/>
+</p:column>
+                               <f:facet name="footer">
+                    <p:commandButton id="createButton" rendered='#{authentification.havePrivilege("COMPTEUTILISATEUR_ADD")}' icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{compteUtilisateurController.prepareCreate}" update=":CompteUtilisateurCreateForm:display" oncomplete="PF('CompteUtilisateurCreateDialog').show()"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CompteUtilisateurViewForm:display" oncomplete="PF('CompteUtilisateurViewDialog').show()" disabled="#{empty compteUtilisateurController.selected}"/>
+                    <p:commandButton id="editButton" rendered='#{authentification.havePrivilege("COMPTEUTILISATEUR_EDIT")}'   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CompteUtilisateurEditForm:display" oncomplete="PF('CompteUtilisateurEditDialog').show()" disabled="#{empty compteUtilisateurController.selected}"/>
+                    <p:commandButton id="editButton2" rendered='#{authentification.havePrivilege("COMPTEUTILISATEUR_EDIT")}'   icon="ui-icon-pencil" value="#{bundle.EditPasswordUtilisateur}" update=":CompteUtilisateurEdit2Form:display" oncomplete="PF('CompteUtilisateurEdit2Dialog').show()" disabled="#{empty compteUtilisateurController.selected}"/>
+                    <p:commandButton id="deleteButton"  rendered='#{authentification.havePrivilege("COMPTEUTILISATEUR_DELETE")}' icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="PF('confirmation').show()" disabled="#{empty compteUtilisateurController.selected}"/>
+                    <p:commandButton id="refreshButton" icon="ui-icon-refresh"  value="#{bundle.Refresh}" actionListener="#{compteUtilisateurController.initList()}" update="datalist"/>
+                   </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+<p:confirmDialog id="confirmDialog" rendered='#{authentification.havePrivilege("COMPTEUTILISATEUR_DELETE")}' message="#{bundle.CompteUtilisateurConfirmDelete}"  
+                header="#{bundle.ConfirmTitle}" severity="alert" widgetVar="confirmation">  
+                <div style="text-align: center;margin-top:10px;margin-bottom:10px;">  
+        <p:commandButton id="confirm" value="#{bundle.Yes}" actionListener="#{compteUtilisateurController.delete}" oncomplete="PF('confirmation').hide()"
+                    update=":growl,datalist" />  
+        <p:commandButton id="decline" value="#{bundle.No}" onclick="PF('confirmation').hide()" type="button" /> 
+        </div>  
+                  
+    </p:confirmDialog> 
+    </h:form>
+
+</ui:composition>

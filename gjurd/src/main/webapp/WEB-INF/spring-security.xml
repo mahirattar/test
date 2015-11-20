@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+ 
+<http pattern="/login.xhtm*" security="none"/>  
+<http pattern="/javax.faces.resource/**" security="none"/>
+<http pattern="/resources/**" security="none"/>    
+<http auto-config="false" access-denied-page="/noaut.xhtml" use-expressions="true">
+	<logout logout-success-url="/login.xhtml?logout=true"  />		
+	<form-login login-page="/login.xhtml" default-target-url="/index.xhtml" authentication-failure-url="/login.xhtml?erreur=true"/>
+   
+   <intercept-url pattern="/compteutilisateur/**" access="hasRole('ROLE_COMPTEUTILISATEUR_READ')" />
+   <intercept-url pattern="/profile/**" access="hasRole('ROLE_PROFILE_READ')" />
+   <intercept-url pattern="/utilisateur/**" access="hasRole('ROLE_UTILISATEUR_READ')" />
+   
+   <intercept-url pattern="/consultation/**" access="hasRole('ROLE_CONSULTATION_READ')" />
+   <intercept-url pattern="/message/**" access="hasRole('ROLE_MESSAGE_READ')" />
+ 
+   
+   <intercept-url pattern="/modifpassword*" access="isAuthenticated()" />
+  
+   
+   <intercept-url pattern="/**" access="permitAll" />
+     <custom-filter after="LAST" ref="passwordExpirationFilter" />
+  	</http>
+	
+<authentication-manager>
+  <authentication-provider user-service-ref="userDetailsServiceImpl">
+      <password-encoder hash="sha-256"/>
+     </authentication-provider>
+</authentication-manager>
+	
+</beans:beans>

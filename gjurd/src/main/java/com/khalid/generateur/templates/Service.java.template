@@ -1,0 +1,33 @@
+package ##PACKAGE##;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import ##DAO_PACKAGE##;
+import ##ENTITY_PACKAGE##;
+
+
+
+/**
+class service du ##ENTITY##
+*/
+@Service
+public class ##SERVICE## extends AbstractService<##ENTITY##> implements I##SERVICE## {
+private static final Log log = LogFactory.getLog(##SERVICE##.class);	
+	@Autowired
+	private ##DAO## dao;
+	
+	public ##DAO## getDao() {
+		return dao;
+	}
+
+	public void setDao(##DAO## dao) {
+		this.dao = dao;
+	}
+
+
+	
+}

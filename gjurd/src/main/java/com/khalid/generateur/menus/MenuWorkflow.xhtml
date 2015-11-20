@@ -1,0 +1,9 @@
+ <ui:insert name="menuworkflow"> 
+            <h:panelGroup rendered='#{authentification.havePrivilege("WORKFLOW_READ")}' >	       
+			<li ><a href="#">Workflow</a>
+				<ul>
+				     <li><h:commandLink action="/workflow/index" value="Workflows"/></li> 		
+                                                     	</ul>
+			</li>
+			</h:panelGroup>
+                          </ui:insert>  

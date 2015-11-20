@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UtilisateurViewDlg" widgetVar="UtilisateurViewDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.ViewUtilisateurTitle}">
+
+            <h:form id="UtilisateurViewForm">
+		        <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{utilisateurController.selected != null}">
+                    <p:outputLabel value='#{bundle.UtilisateurLabel_email}:' />
+<h:outputText value='#{utilisateurController.selected.email}' title='#{bundle.UtilisateurLabel_email}'/><p:outputLabel value='#{bundle.UtilisateurLabel_nom}:' />
+<h:outputText value='#{utilisateurController.selected.nom}' title='#{bundle.UtilisateurLabel_nom}'/><p:outputLabel value='#{bundle.UtilisateurLabel_prenom}:' />
+<h:outputText value='#{utilisateurController.selected.prenom}' title='#{bundle.UtilisateurLabel_prenom}'/>
+		         </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="UtilisateurViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

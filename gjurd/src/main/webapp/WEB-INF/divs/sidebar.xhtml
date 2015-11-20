@@ -1,0 +1,118 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+      
+    </h:head>
+    <h:body>
+     <div class="sidebar"> <!-- *** sidebar layout *** -->
+         <h:form>	
+         <div class="logo clear">
+			<h:link outcome="/index" >
+			    <h:graphicImage url="/resources/images/logog.png" class="picture" width="200" height="207"/>
+                        </h:link>
+		</div>
+		
+		<div class="menu" style="padding-top: 8px;">
+			<ul>
+            
+			  
+	 <ui:insert name="menucompteutilisateur"> 
+            <h:panelGroup rendered='#{authentification.havePrivilege("COMPTEUTILISATEUR_READ")}' >	       
+			<li ><a href="#">CompteUtilisateur</a>
+				<ul>
+				     <li><h:commandLink action="/compteutilisateur/index?faces-redirect=true" value="CompteUtilisateurs"/></li> 		
+                                                     	</ul>
+			</li>
+			</h:panelGroup>
+                          </ui:insert>  
+                          
+      <ui:insert name="menuprofile"> 
+            <h:panelGroup rendered='#{authentification.havePrivilege("PROFILE_READ")}' >	       
+			<li ><a href="#">Profile</a>
+				<ul>
+				     <li><h:commandLink action="/profile/index?faces-redirect=true" value="Profiles"/></li> 		
+                                                     	</ul>
+			</li>
+			</h:panelGroup>
+                          </ui:insert>  
+                          
+                           <ui:insert name="menuutilisateur"> 
+            <h:panelGroup rendered='#{authentification.havePrivilege("UTILISATEUR_READ")}' >	       
+			<li ><a href="#">Utilisateur</a>
+				<ul>
+				     <li><h:commandLink action="/utilisateur/index?faces-redirect=true" value="Utilisateurs"/></li> 		
+                                                     	</ul>
+			</li>
+			</h:panelGroup>
+                          </ui:insert>   
+                          
+                          
+            <ui:insert name="menuworkflow"> 
+            <h:panelGroup rendered='#{authentification.havePrivilege("WORKFLOW_READ")}' >	       
+			<li ><a href="#">Workflow</a>
+				<ul>
+				     <li><h:commandLink action="/workflow/index" value="Workflows"/></li> 		
+				      <li><h:commandLink action="/workflow/diagram" value="Diagram"/></li>
+                                                     	</ul>
+			</li>
+			</h:panelGroup>
+                          </ui:insert>                            
+                          
+                <ui:insert name="menuconsultation">
+						<h:panelGroup
+							rendered='#{authentification.havePrivilege("CONSULTATION_READ")}'>
+							<li><a href="#">Consultation</a>
+								<ul>
+									<li><h:commandLink action="/consultation/index"
+											value="Consultations" /></li>
+								</ul></li>
+						</h:panelGroup>
+					</ui:insert>
+                          
+                          
+                <ui:insert name="menucabinet"> 
+            <h:panelGroup rendered='#{authentification.havePrivilege("CABINET_READ")}' >	       
+			<li ><a href="#">Cabinet</a>
+				<ul>
+				     <li><h:commandLink action="/cabinet/index" value="Cabinets"/></li> 		
+                                                     	</ul>
+			</li>
+			</h:panelGroup>
+                          </ui:insert>             
+           
+            <ui:insert name="menudepartement"> 
+            <h:panelGroup rendered='#{authentification.havePrivilege("DEPARTEMENT_READ")}' >	       
+			<li ><a href="#">Departement</a>
+				<ul>
+				     <li><h:commandLink action="/departement/index" value="Departements"/></li> 		
+                                                     	</ul>
+			</li>
+			</h:panelGroup>
+                          </ui:insert>                 
+                          
+               
+                          
+                          
+                  <ui:insert name="menutest"> 
+          <li ><a href="#">TESTS</a>
+				<ul>
+				      <li><h:commandLink action="#{excelController.exporter()}" value="exporter excel"/></li> 
+				       <li><h:commandLink action="/test/excel/importer" value="importer excel"/></li>
+				        <li><h:commandLink action="/test/jasper/jasper" value="exporter report jasper"/></li> 		 		
+				          <li><h:commandLink action="/test/mail/mail" value="envoyer email"/></li>
+                                                     	</ul>
+			</li>
+			              </ui:insert>  
+                          
+                                         
+			</ul>
+		</div>
+         </h:form>
+     </div>
+    </h:body>
+</html>
+

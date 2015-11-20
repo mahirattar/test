@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+
+        <p:dialog id="EtapeEditDlg" widgetVar="EtapeEditDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.EditEtapeTitle}">
+
+            <h:form id="EtapeEditForm">
+
+         
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{etapeController.selected != null}">
+                    	
+	<p:outputLabel value='#{bundle.EtapeLabel_cabinet}' for='cabinet' />
+	<p:selectOneMenu id='cabinet' value='#{etapeController.selected.cabinet}' converter='#{cabinetConverter}' >
+		<f:selectItem noSelectionOption='true' itemLabel='#{bundle.SelectOneMessage}' />
+		<f:selectItems value='#{cabinetController.items}' var='item' itemValue='#{item}' itemLabel='#{item.libelle}' />
+	</p:selectOneMenu>
+
+
+	<p:outputLabel value='#{bundle.EtapeLabel_x}' for='x' />
+	<p:inputText id='x' value='#{etapeController.selected.x}' title='#{bundle.EtapeLabel_x}' required='true' requiredMessage='#{bundle.EtapeRequiredMessage_x}'/>
+
+
+	<p:outputLabel value='#{bundle.EtapeLabel_y}' for='y' />
+	<p:inputText id='y' value='#{etapeController.selected.y}' title='#{bundle.EtapeLabel_y}' required='true' requiredMessage='#{bundle.EtapeRequiredMessage_y}'/>
+
+
+	<p:outputLabel value='#{bundle.EtapeLabel_workflow}' for='workflow' />
+	<p:selectOneMenu id='workflow' value='#{etapeController.selected.workflow}' converter='#{workflowConverter}' >
+		<f:selectItem noSelectionOption='true' itemLabel='#{bundle.SelectOneMessage}' />
+		<f:selectItems value='#{workflowController.items}' var='item' itemValue='#{item}' itemLabel='#{item.libelle}' />
+	</p:selectOneMenu>
+
+					
+        </p:panelGrid>
+                    <p:commandButton actionListener="#{etapeController.edit}" value="#{bundle.Save}" update="display,:growl,:EtapeListForm:datalist" oncomplete="if(!args.validationFailed) {PF('EtapeEditDialog').hide();}"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('EtapeEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

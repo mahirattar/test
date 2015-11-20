@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="ConditionListForm">
+		  <p:panel header="#{bundle.ListConditionTitle}">
+
+         
+
+            <p:dataTable id="datalist" value="#{conditionController.items}" var="item"
+                         selectionMode="single" selection="#{conditionController.selected}"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="15"
+                          paginatorPosition="bottom"
+                          emptyMessage="#{bundle.ListConditionEmpty}"
+                        
+                         >
+
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                                    	<p:column sortBy='#{item.attribut}' filterBy='#{item.attribut}'>
+		<f:facet name='header'>
+			<h:outputText value='#{bundle.ConditionLabel_attribut}:' />
+		</f:facet>
+			<h:outputText value='#{item.attribut}'/>
+	</p:column>	<p:column sortBy='#{item.operateur}' filterBy='#{item.operateur}'>
+		<f:facet name='header'>
+			<h:outputText value='#{bundle.ConditionLabel_operateur}:' />
+		</f:facet>
+			<h:outputText value='#{item.operateur}'/>
+	</p:column>	<p:column sortBy='#{item.valeur1}' filterBy='#{item.valeur1}'>
+		<f:facet name='header'>
+			<h:outputText value='#{bundle.ConditionLabel_valeur1}:' />
+		</f:facet>
+			<h:outputText value='#{item.valeur1}'/>
+	</p:column>	<p:column sortBy='#{item.valeur2}' filterBy='#{item.valeur2}'>
+		<f:facet name='header'>
+			<h:outputText value='#{bundle.ConditionLabel_valeur2}:' />
+		</f:facet>
+			<h:outputText value='#{item.valeur2}'/>
+	</p:column>	<p:column sortBy='#{item.etape1.libelle}' filterBy='#{item.etape1.libelle}'>
+		<f:facet name='header'>
+			<h:outputText value='#{bundle.ConditionLabel_etape1}:' />
+		</f:facet>
+			<h:outputText value='#{item.etape1.libelle}'/>
+	</p:column>	<p:column sortBy='#{item.etape2.libelle}' filterBy='#{item.etape2.libelle}'>
+		<f:facet name='header'>
+			<h:outputText value='#{bundle.ConditionLabel_etape2}:' />
+		</f:facet>
+			<h:outputText value='#{item.etape2.libelle}'/>
+	</p:column>	<p:column sortBy='#{item.etape3.libelle}' filterBy='#{item.etape3.libelle}'>
+		<f:facet name='header'>
+			<h:outputText value='#{bundle.ConditionLabel_etape3}:' />
+		</f:facet>
+			<h:outputText value='#{item.etape3.libelle}'/>
+	</p:column>
+                               <f:facet name="footer">
+                    <p:commandButton id="createButton" rendered='#{authentification.havePrivilege("CONDITION_ADD")}' icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{conditionController.prepareCreate}" update=":ConditionCreateForm:display" oncomplete="PF('ConditionCreateDialog').show()"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ConditionViewForm:display" oncomplete="PF('ConditionViewDialog').show()" disabled="#{empty conditionController.selected}"/>
+                    <p:commandButton id="editButton" rendered='#{authentification.havePrivilege("CONDITION_EDIT")}'   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ConditionEditForm:display" oncomplete="PF('ConditionEditDialog').show()" disabled="#{empty conditionController.selected}"/>
+                    <p:commandButton id="deleteButton" rendered='#{authentification.havePrivilege("CONDITION_DELETE")}' icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="PF('confirmation').show()" disabled="#{empty conditionController.selected}"/>
+                    <p:commandButton id="refreshButton" icon="ui-icon-refresh"  value="#{bundle.Refresh}" actionListener="#{conditionController.initList()}" update="datalist"/>
+                   </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+<p:confirmDialog id="confirmDialog" rendered='#{authentification.havePrivilege("CONDITION_DELETE")}' message="#{bundle.ConditionConfirmDelete}"  
+                header="#{bundle.ConfirmTitle}" severity="alert" widgetVar="confirmation">  
+                <div style="text-align: center;margin-top:10px;margin-bottom:10px;">  
+        <p:commandButton id="confirm" value="#{bundle.Yes}" actionListener="#{conditionController.delete}" oncomplete="PF('confirmation').hide()"
+                    update=":growl,datalist" />  
+        <p:commandButton id="decline" value="#{bundle.No}" onclick="PF('confirmation').hide()" type="button" /> 
+        </div>  
+                  
+    </p:confirmDialog> 
+    </h:form>
+
+</ui:composition>

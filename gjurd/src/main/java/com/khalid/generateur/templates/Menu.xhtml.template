@@ -1,0 +1,9 @@
+ <ui:insert name="menu##ENTITE_MINISCULE##"> 
+            <h:panelGroup rendered='#{authentification.havePrivilege("##ENTITE_MAJISCULE##_READ")}' >	       
+			<li ><a href="#">##ENTITY##</a>
+				<ul>
+				     <li><h:commandLink action="/##DOSSIER##/index" value="##ENTITY##s"/></li> 		
+                                                     	</ul>
+			</li>
+			</h:panelGroup>
+                          </ui:insert>  

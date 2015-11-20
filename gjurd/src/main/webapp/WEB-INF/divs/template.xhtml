@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+        <f:view locale="#{changeLocale.locale}">
+    <h:head>
+         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+       <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/images/logog.png"/> 
+       <h:outputStylesheet  name="css/fancybox.css"/>
+         <h:outputStylesheet name="css/jquery.ui.css"/>
+          <h:outputStylesheet  name="css/reset.css"/>
+         <h:outputStylesheet name="css/screen.css"/>
+         <h:outputStylesheet  name="css/visualize-light.css"/>
+         <h:outputStylesheet name="css/visualize.css"/>
+          <h:outputStylesheet name="css/style.css"/>
+          <h:outputScript library="primefaces" name="jquery/jquery.js" />
+          <title><ui:insert name="title">Cahier d'Ordre Electronique</ui:insert></title>
+           <script type="text/javascript">
+               
+           </script>
+          
+          <ui:insert name="head"></ui:insert>
+         
+    </h:head>
+    <h:body>
+        <div class="clear">
+            
+             <ui:include src="sidebar.xhtml"/>
+             <p:panel rendered="false" />
+             <div class="main" > <!-- *** mainpage layout *** -->
+                 <div class="main-wrap">
+                     <div class="header clear">
+                 <ui:include src="entete.xhtml"/>
+                 </div>
+                <div class="page clear">
+                    <ui:insert name="body">Default Body</ui:insert>
+                </div>
+                  <ui:include src="footer.xhtml"/>
+                 </div>
+             </div>
+        </div>
+        <script type="text/javascript">
+      
+    $(document).ready(function () {
+	       /* Sliding submenus */
+	$('.sidebar .menu ul ul').hide();
+	$('.sidebar .menu ul li.active ul').show();
+	
+	$('.sidebar .menu ul li').click(function () {
+		submenu = $(this).find('ul');
+		if (submenu.is(':visible'))
+			submenu.slideUp(150);					
+		else
+			submenu.slideDown(200);									
+		return false;
+	});
+	
+	/* Hover effect on links */
+	$('.sidebar .menu li a').hover(
+		function () { $(this).stop().animate({'paddingLeft': '18px'}, 200); },
+		function () { $(this).stop().animate({'paddingLeft': '12px'}, 200); }
+	)
+             });
+       
+PrimeFaces.locales ['fr'] = {
+    closeText: 'Fermer',
+    prevText: 'Précédent',
+    nextText: 'Suivant',
+    monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
+    monthNamesShort: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc' ],
+    dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+    dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+    dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+    weekHeader: 'Semaine',
+    firstDay: 1,
+    isRTL: false,
+    showMonthAfterYear: false,
+    yearSuffix:'',
+    timeOnlyTitle: 'Choisir l\'heure',
+    timeText: 'Heure',
+    hourText: 'Heures',
+    minuteText: 'Minutes',
+    secondText: 'Secondes',
+    currentText: 'Maintenant',
+    ampm: false,
+    month: 'Mois',
+    week: 'Semaine',
+    day: 'Jour',
+    allDayText: 'Toute la journée'};     
+
+        </script> 
+    </h:body>
+    </f:view>
+</html>
+

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+
+        <p:dialog id="ProfileCreateDialog" widgetVar="ProfileCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.CreateProfileTitle}">
+
+            <h:form id="ProfileCreateForm">
+			   <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{profileController.selected != null}">
+						<p:outputLabel value='#{bundle.ProfileLabel_libelle}' for='libelle' />
+<p:inputText id='libelle' value='#{profileController.selected.libelle}' title='#{bundle.ProfileLabel_libelle}' />
+<p:outputLabel value='#{bundle.ProfileLabel_descrition}' for='descrition' />
+<p:inputText id='descrition' value='#{profileController.selected.descrition}' title='#{bundle.ProfileLabel_descrition}' />
+
+<p:outputLabel value='#{bundle.ProfileLabel_standard}' for='standard' />
+	<p:selectBooleanCheckbox id='standard' value='#{profileController.selected.standard}'  title='#{bundle.ProfileLabel_standard}' />
+
+
+	<p:outputLabel value='#{bundle.ProfileLabel_haveuser}' for='haveuser' />
+	<p:selectBooleanCheckbox id='haveuser' value='#{profileController.selected.haveuser}'  title='#{bundle.ProfileLabel_haveuser}' />
+
+	
+                          </p:panelGrid>
+                          	<h3><p:outputLabel value='#{bundle.ProfileLabel_previleges}' for='previleges' /></h3>
+                     <p:pickList id="previleges" style="width: 100px;" value="#{profileController.previleges}" converter="#{previlegeConverter}" var="item" itemLabel="#{item.nom}" itemValue="#{item}" />
+             
+                    <p:commandButton actionListener="#{profileController.create}" value="#{bundle.Save}" update="display,:growl,:ProfileListForm:datalist" oncomplete="if(!args.validationFailed) {PF('ProfileCreateDialog').hide();}"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('ProfileCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

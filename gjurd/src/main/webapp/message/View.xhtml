@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MessageViewDlg" widgetVar="MessageViewDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.ViewMessageTitle}">
+
+            <h:form id="MessageViewForm">
+		        <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{messageController.selected != null}">
+                    
+	<p:outputLabel value='#{bundle.MessageLabel_contenu}:' />
+	<h:outputText value='#{messageController.selected.contenu}' title='#{bundle.MessageLabel_contenu}'/>
+
+	<p:outputLabel value='#{bundle.MessageLabel_date}:' />
+	<h:outputText value='#{messageController.selected.date}' title='#{bundle.MessageLabel_date}'><f:convertDateTime locale='#{changeLocale.locale}' pattern='dd/MM/yyyy'/></h:outputText>
+
+
+	<p:outputLabel value='#{bundle.MessageLabel_utilisateur}:' />
+	<h:outputText value='#{messageController.selected.utilisateur.libelle}' title='#{bundle.MessageLabel_utilisateur}'/>
+
+		         </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MessageViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

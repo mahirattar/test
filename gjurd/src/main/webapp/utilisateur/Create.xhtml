@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+
+        <p:dialog id="UtilisateurCreateDialog" widgetVar="UtilisateurCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.CreateUtilisateurTitle}">
+
+            <h:form id="UtilisateurCreateForm">
+			   <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{utilisateurController.selected != null}">
+						<p:outputLabel value='#{bundle.UtilisateurLabel_email}' for='email' />
+<p:inputText id='email' value='#{utilisateurController.selected.email}' title='#{bundle.UtilisateurLabel_email}' />
+<p:outputLabel value='#{bundle.UtilisateurLabel_nom}' for='nom' />
+<p:inputText id='nom' value='#{utilisateurController.selected.nom}' title='#{bundle.UtilisateurLabel_nom}' />
+<p:outputLabel value='#{bundle.UtilisateurLabel_prenom}' for='prenom' />
+<p:inputText id='prenom' value='#{utilisateurController.selected.prenom}' title='#{bundle.UtilisateurLabel_prenom}' />
+	
+                          </p:panelGrid>
+                    <p:commandButton actionListener="#{utilisateurController.create}" value="#{bundle.Save}" update="display,:growl,:UtilisateurListForm:datalist" oncomplete="if(!args.validationFailed) {PF('UtilisateurCreateDialog').hide();}"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('UtilisateurCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

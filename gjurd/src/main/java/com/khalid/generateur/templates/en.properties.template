@@ -1,0 +1,24 @@
+CREATE_SUCCESS=##ENTITE##CreateSucess=##ENTITE## successfully added.
+CREATE_ERROR=##ENTITE##CreateError=Error while adding.
+
+Edit_SUCCESS=##ENTITE##EditSucess=##ENTITE## Successfully changed.
+Edit_ERROR=##ENTITE##EditError=Error in change.
+
+Delete_SUCCESS=##ENTITE##DeleteSucess=##ENTITE## Deleted successfully.
+Delete_ERROR=##ENTITE##DeleteError=Error while deleting.
+Delete_CONFIRM=##ENTITE##ConfirmDelete= Really want to delete ##ENTITE_MINISCULE##
+
+TITLE=##ENTITE##Title=Management of ##ENTITE_MINISCULE##s
+
+LIST_TITLE=List##ENTITE##Title=List of ##ENTITE_MINISCULE##s
+LIST_EMPTY=List##ENTITE##Empty=(No items found in the database)
+
+CREATE_TITLE=Create##ENTITE##Title=Add a ##ENTITE_MINISCULE##
+
+EDIT_TITLE=Edit##ENTITE##Title=Change a ##ENTITE_MINISCULE##
+
+VIEW_TITLE=View##ENTITE##Title=View a ##ENTITE_MINISCULE##
+
+ATTRIBUTE_LABEL=##ENTITE##Label_##ATTRIBUT##=##ATTRIBUT_CAPITAL##
+
+ATTRIBUTE_REQUIRED=##ENTITE##RequiredMessage_##ATTRIBUT##=* Required field: ##ATTRIBUT_CAPITAL##.

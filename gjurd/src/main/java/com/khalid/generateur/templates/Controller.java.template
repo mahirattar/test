@@ -1,0 +1,47 @@
+package ##PACKAGE##;
+
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
+
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import javax.annotation.PostConstruct;
+
+import ##SERVICE_PACKAGE##;
+import ##ISERVICE_PACKAGE##;
+import ##ENTITY_PACKAGE##;
+
+
+@ManagedBean
+@SessionScoped
+public class ##CONTROLLER## extends AbstractController<##ENTITY##> {
+
+	private static final Log log = LogFactory.getLog(##CONTROLLER##.class);
+	   
+	
+	@ManagedProperty(value="#{##BEANSERVICE##}")
+    private I##SERVICE## service;
+	
+    public ##CONTROLLER##() {
+        super(##ENTITY##.class);
+    }
+
+    @PostConstruct
+    public void init() {
+      
+   
+    }
+
+	public I##SERVICE## getService() {
+		return service;
+	}
+
+	public void setService(I##SERVICE## service) {
+		this.service = service;
+	}
+	
+	
+}

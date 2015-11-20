@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+
+        <p:dialog id="MessageCreateDialog" widgetVar="MessageCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.CreateMessageTitle}">
+
+            <h:form id="MessageCreateForm">
+			   <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{messageController.selected != null}">
+						
+	<p:outputLabel value='#{bundle.MessageLabel_contenu}' for='contenu' />
+	<p:inputText id='contenu' value='#{messageController.selected.contenu}' title='#{bundle.MessageLabel_contenu}' />
+
+
+	<p:outputLabel value='#{bundle.MessageLabel_date}' for='date' />
+	<p:calendar locale='#{changeLocale.locale}' id='date' value='#{messageController.selected.date}' pattern='dd/MM/yyyy'   title='#{bundle.MessageLabel_date}'  />
+
+
+	<p:outputLabel value='#{bundle.MessageLabel_utilisateur}' for='utilisateur' />
+	<p:selectOneMenu id='utilisateur' value='#{messageController.selected.utilisateur}' converter='#{utilisateurConverter}' >
+		<f:selectItem noSelectionOption='true' itemLabel='#{bundle.SelectOneMessage}' />
+		<f:selectItems value='#{utilisateurController.items}' var='item' itemValue='#{item}' itemLabel='#{item.libelle}' />
+	</p:selectOneMenu>
+
+	
+                          </p:panelGrid>
+                    <p:commandButton actionListener="#{messageController.create}" value="#{bundle.Save}" update="display,:growl,:MessageListForm:datalist" oncomplete="if(!args.validationFailed) {PF('MessageCreateDialog').hide();}"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('MessageCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

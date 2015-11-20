@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/divs/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="Importer"/>
+    </ui:define>
+ 
+    <ui:define name="body">
+
+ <p:growl id="growl" life="3000"/>
+   
+        <p:panel header="Importer" id="headeraf" styleClass="headeraf" style="margin-top: -24px;">
+          
+           <h:form enctype="multipart/form-data">
+           <p:fileUpload value="#{excelController.file}"  mode="simple" />
+           <p:commandButton value="Envoyer" action="#{excelController.importer()}" ajax="false"/>
+            <h:panelGroup rendered="#{excelController.msgs.size()!=0}" >
+            	<div style="border:1px solid;padding-left:5px;margin-top: 9px;">
+            	<ui:repeat var="m" value="#{excelController.msgs}">
+            	 <h:panelGroup rendered="#{m.type==1}" ><h:outputText style="color:green;margin-left:10px;"  value="  #{m.msg}"/></h:panelGroup>
+            	 <h:panelGroup rendered="#{m.type==0}" ><h:outputText style="color:blue"  value="#{m.msg}"/></h:panelGroup><br/>
+            	 <h:panelGroup rendered="#{m.type==2}" ><h:outputText style="color:red"  value="#{m.msg}"/></h:panelGroup><br/>
+            	</ui:repeat>
+            	</div>
+            </h:panelGroup>     
+                 </h:form>
+                 
+        </p:panel>
+ 
+    </ui:define>
+
+</ui:composition>

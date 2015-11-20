@@ -1,0 +1,9 @@
+ <ui:insert name="menucabinet"> 
+            <h:panelGroup rendered='#{authentification.havePrivilege("CABINET_READ")}' >	       
+			<li ><a href="#">Cabinet</a>
+				<ul>
+				     <li><h:commandLink action="/cabinet/index" value="Cabinets"/></li> 		
+                                                     	</ul>
+			</li>
+			</h:panelGroup>
+                          </ui:insert>  

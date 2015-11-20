@@ -1,0 +1,9 @@
+ <ui:insert name="menuprofile"> 
+            <h:panelGroup rendered='#{authentification.havePrivilege("PROFILE_READ")}' >	       
+			<li ><a href="#">Profile</a>
+				<ul>
+				     <li><h:commandLink action="/profile/index" value="Profiles"/></li> 		
+                                                     	</ul>
+			</li>
+			</h:panelGroup>
+                          </ui:insert>  

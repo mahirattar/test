@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="WorkflowViewDlg" widgetVar="WorkflowViewDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.ViewWorkflowTitle}">
+
+            <h:form id="WorkflowViewForm">
+		        <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{workflowController.selected != null}">
+                    
+	<p:outputLabel value='#{bundle.WorkflowLabel_nom}:' />
+	<h:outputText value='#{workflowController.selected.nom}' title='#{bundle.WorkflowLabel_nom}'/>
+
+	
+	<p:outputLabel value='#{bundle.WorkflowLabel_etat}:' />
+	<h:outputText value='#{workflowController.selected.etat}' title='#{bundle.WorkflowLabel_etat}'/>
+
+
+	<p:outputLabel value='#{bundle.WorkflowLabel_valide}:' />
+	    <h:outputText value='#{bundle.Yes}' rendered='#{workflowController.selected.valide}'/>
+		<h:outputText value='#{bundle.No}' rendered='#{workflowController.selected.valide == false}'/>
+	 
+	 	<p:outputLabel value='#{bundle.WorkflowLabel_cabinet}:' />
+	<h:outputText value='#{workflowController.selected.cabinet.nom}' title='#{bundle.WorkflowLabel_cabinet}'/>
+	
+	
+	<p:outputLabel value='#{bundle.WorkflowLabel_description}:' />
+	<h:outputText value='#{workflowController.selected.description}' title='#{bundle.WorkflowLabel_description}'/>
+	    
+		         </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="WorkflowViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

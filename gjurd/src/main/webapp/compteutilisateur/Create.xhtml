@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+
+        <p:dialog id="CompteUtilisateurCreateDialog" widgetVar="CompteUtilisateurCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.CreateCompteUtilisateurTitle}">
+
+            <h:form id="CompteUtilisateurCreateForm">
+			   <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{compteUtilisateurController.selected != null}">
+						<p:outputLabel value='#{bundle.CompteUtilisateurLabel_login}' for='login' />
+<p:inputText id='login' value='#{compteUtilisateurController.selected.login}' title='#{bundle.CompteUtilisateurLabel_login}' required='true' requiredMessage='#{bundle.CompteUtilisateurRequiredMessage_login}'/>
+<p:outputLabel value='#{bundle.CompteUtilisateurLabel_password}' for='password' />
+    <p:password id="password"  value="#{compteUtilisateurController.selected.password}" feedback="true"   
+                        promptLabel="#{bundle.CompteUtilisateur_passwordlabel}" weakLabel="#{bundle.Password_weak}"  
+                        goodLabel="#{bundle.Password_good}" strongLabel="#{bundle.Password_strong}"   >
+                         </p:password>
+  <p:outputLabel value='#{bundle.CompteUtilisateurLabel_confirmation}' for='confirm' />
+ <p:password id="confirm"  value="#{compteUtilisateurController.confirm}"  >
+                      </p:password>
+                      
+                         <p:outputLabel value='#{bundle.CompteUtilisateurLabel_actif}' for='actif' />
+<p:selectBooleanCheckbox id='actif' value='#{compteUtilisateurController.selected.actif}'  title='#{bundle.CompteUtilisateurLabel_actif}' />
+
+<p:outputLabel value='#{bundle.CompteUtilisateurLabel_utilisateur}' for='utilisateur' />
+<p:selectOneMenu id='utilisateur' value='#{compteUtilisateurController.selected.utilisateur}' converter='#{utilisateurConverter}' >
+<f:selectItem itemValue='' itemLabel='#{bundle.SelectOneMessage}' />
+<f:selectItems value='#{utilisateurController.items}' var='item' itemValue='#{item}' itemLabel='#{item.libelle}' />
+</p:selectOneMenu>
+<p:outputLabel value='#{bundle.CompteUtilisateurLabel_profile}' for='profile' />
+<p:selectOneMenu id='profile' value='#{compteUtilisateurController.selected.profile}' converter='#{profileConverter}' >
+<f:selectItem  itemLabel='#{bundle.SelectOneMessage}' />
+<f:selectItems value='#{profileController.items}' var='item' itemValue='#{item}' itemLabel='#{item.libelle}' />
+</p:selectOneMenu>
+	
+                          </p:panelGrid>
+                    <p:commandButton actionListener="#{compteUtilisateurController.create}" value="#{bundle.Save}" update="display,:growl,:CompteUtilisateurListForm:datalist" oncomplete="if(!args.validationFailed) {PF('CompteUtilisateurCreateDialog').hide();}"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('CompteUtilisateurCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

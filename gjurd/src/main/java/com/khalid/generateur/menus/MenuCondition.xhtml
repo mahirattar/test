@@ -1,0 +1,9 @@
+ <ui:insert name="menucondition"> 
+            <h:panelGroup rendered='#{authentification.havePrivilege("CONDITION_READ")}' >	       
+			<li ><a href="#">Condition</a>
+				<ul>
+				     <li><h:commandLink action="/condition/index" value="Conditions"/></li> 		
+                                                     	</ul>
+			</li>
+			</h:panelGroup>
+                          </ui:insert>  

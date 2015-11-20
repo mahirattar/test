@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConditionViewDlg" widgetVar="ConditionViewDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.ViewConditionTitle}">
+
+            <h:form id="ConditionViewForm">
+		        <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{conditionController.selected != null}">
+                    
+	<p:outputLabel value='#{bundle.ConditionLabel_attribut}:' />
+	<h:outputText value='#{conditionController.selected.attribut}' title='#{bundle.ConditionLabel_attribut}'/>
+
+	<p:outputLabel value='#{bundle.ConditionLabel_operateur}:' />
+	<h:outputText value='#{conditionController.selected.operateur}' title='#{bundle.ConditionLabel_operateur}'/>
+
+	<p:outputLabel value='#{bundle.ConditionLabel_valeur1}:' />
+	<h:outputText value='#{conditionController.selected.valeur1}' title='#{bundle.ConditionLabel_valeur1}'/>
+
+	<p:outputLabel value='#{bundle.ConditionLabel_valeur2}:' />
+	<h:outputText value='#{conditionController.selected.valeur2}' title='#{bundle.ConditionLabel_valeur2}'/>
+
+	<p:outputLabel value='#{bundle.ConditionLabel_etape1}:' />
+	<h:outputText value='#{conditionController.selected.etape1.libelle}' title='#{bundle.ConditionLabel_etape1}'/>
+
+	<p:outputLabel value='#{bundle.ConditionLabel_etape2}:' />
+	<h:outputText value='#{conditionController.selected.etape2.libelle}' title='#{bundle.ConditionLabel_etape2}'/>
+
+	<p:outputLabel value='#{bundle.ConditionLabel_etape3}:' />
+	<h:outputText value='#{conditionController.selected.etape3.libelle}' title='#{bundle.ConditionLabel_etape3}'/>
+
+		         </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ConditionViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

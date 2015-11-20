@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+      <div class="main-wrap">
+      <p:growl id="growl2" life="3000"/>
+             <h:panelGroup rendered="#{authentification.isAuthenticated()}" >	
+     		   <ui:include src="EditPasswordCurrentUser.xhtml"/>
+     		 </h:panelGroup>		
+      
+		<h:form>
+			
+			 <p:overlayPanel id="notifpanel" for="notiflink" style="width:500px;height:300px;" showEffect="blind" hideEffect="explode" showEvent="mouseover" hideEvent="mousedown" rendered="#{authentification.isAuthenticated()}">
+      			<ul>
+      			<ui:repeat var="notif" value="#{authentification.notifications}">
+      				<li>#{notif.type} : #{notif.view(changeLocale.locale)}</li>
+      			</ui:repeat>
+      			
+      			</ul>
+    </p:overlayPanel>
+			
+			<ul class="links clear">
+		<h:panelGroup rendered="#{authentification.isAuthenticated()}">
+			<li><strong>Bonjour  #{authentification.login}:</strong></li>
+			<li><h:link id="notiflink"> <h:graphicImage url="/resources/images/ico_enelope_24.png" alt="" class="icon" /> <span class="text">#{authentification.notifications.size()} messages</span></h:link></li>
+		
+                           <li>
+                           
+                            <h:graphicImage url="/resources/images/edit.png" width="24" height="24" styleClass="icon" />
+                              
+                              <p:commandLink   value="Modifier le mot de passe" onclick="PF('EditPasswordCurrentUser').show()">
+                                           <span class="text"><h:outputText value="Modifier le mot de passe" /></span>
+                                </p:commandLink>
+                           
+                           </li>
+                            </h:panelGroup>       
+                            <li>
+                             
+                            <h:link outcome="/login"  rendered="#{!authentification.isAuthenticated()}" >
+                               <h:graphicImage url="/resources/images/login.png" width="24" height="24" styleClass="icon" />
+                               <span class="text">  <h:outputText value=" Connexion" /></span>
+                                             
+                           </h:link>
+                             <h:outputLink id="logOut" value="#{request.contextPath}/j_spring_security_logout" rendered="#{authentification.isAuthenticated()}"  >
+                                 <h:graphicImage url="/resources/images/ico_logout_24.png" width="24" height="24" styleClass="icon" />
+                                 <h:outputText value="Déconnexion" />
+                               </h:outputLink> 
+                               
+                               
+                            </li>
+			</ul>
+			
+				<ul class="links clear" style="
+    margin-right: 70px;
+    /* list-style: circle; */
+    font-size: large;
+    font-style: italic;
+">
+		  <li>  <h:commandLink value="#{bundle.FRENSH}" action="#{changeLocale.setFrenchLocale}"/></li>
+         		  <li>				 <h:commandLink value="#{bundle.ENGLISH}" action="#{changeLocale.setEnglishLocale}"/></li>
+    </ul>
+	
+			 </h:form>  
+		
+		</div>
+    </h:body>
+</html>
+

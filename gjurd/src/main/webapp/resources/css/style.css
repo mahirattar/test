@@ -1,0 +1,184 @@
+h2{
+	text-align: center;
+}
+.infop td{
+	border: none!important;
+	padding:0px;
+	padding-top:10px!important;
+	width:190px;
+	}
+.infop tr{
+	border: none!important;
+	padding:0px;
+	padding-top:10px!important;
+	}
+.tabview td, .tabview tr{
+	border: none!important;
+}
+.tabview td
+{
+	font-weight: bolder;
+font-family: cursive;
+color:navy;
+}
+.valview
+{
+	color:crimson;
+}
+
+#tabqualif td,#tabqualif th
+{
+	border-width: 1px;
+border-style: solid;
+border-color: #a6c9e2;
+text-align: center;
+
+}
+#tabqualif th
+{
+
+background-color: #79b7e7
+}
+#tabmiss td,#tabmiss th
+{
+border-width: 1px!important;
+border-style: solid!important;
+border-color: #a6c9e2!important;
+text-align: center!important;
+
+}
+#tabmiss th
+{
+
+background-color: #79b7e7
+}
+.tabstatistique th
+{
+
+background-color: #79b7e7!important;
+}.tabstatistique td,.tabstatistique th
+{
+border-width: 1px!important;
+border-style: solid!important;
+border-color: #a6c9e2!important;
+text-align: center!important;
+
+}
+.tabstatistique th
+{
+
+background-color: #79b7e7!important;
+}
+
+
+
+
+
+.headeraf span
+{
+	font-weight: bold;
+}
+.classVFR{
+	color:red!important;
+	font-weight: bold!important;
+}
+.classVFR td{
+	color:red!important;
+	font-weight: bold!important;
+}
+.classPRVFR{
+	color:red!important;
+	font-weight: bold!important;
+	background-color: yellow;
+}
+.classPRVFR td{
+	color:red!important;
+	font-weight: bold!important;
+	background-color: yellow;
+}
+.classPR{
+	background-color: orange;
+}
+.classPR td{
+	background-color: yellow;
+}
+.prochainevisitesemaine{
+border-bottom: 3px solid orange;
+}
+.prochainevisitdepasse{
+border-bottom: 3px solid red;
+}
+.derniervolmois{
+border-bottom: 3px solid yellow;
+}
+.derniervol3mois{
+border-bottom: 3px solid orange;
+}
+.derniervol6mois{
+border-bottom: 3px solid red;
+}
+.ui-column-filter
+{
+	width: 80px!important;
+}
+
+.ui-datatable-even td,.ui-datatable-odd td{
+	text-align: center!important;
+}
+.tabbottomnone td
+{
+	border:none;
+}
+.infop .ui-selectonemenu{
+	width: 180px!important;
+}
+.ui-picklist .ui-picklist-list {
+height: 131px!important;
+width: 187px!important;
+}
+.classINAPTE{
+	color:red!important;
+	font-weight: bold!important;
+}
+
+.classINAPTEsemaine{
+	color:orange!important;
+	font-weight: bold!important;
+}
+.classINAPTE td{
+	color:red!important;
+	font-weight: bold!important;
+}
+
+.classINAPTEsemaine td{
+	color:orange!important;
+	font-weight: bold!important;
+}
+.classINDISP{
+	color:red!important;
+	font-weight: bold!important;
+}
+.classINDISP td{
+	color:red!important;
+	font-weight: bold!important;
+}
+.hasDatepicker
+{
+	width:172px!important;
+}
+
+#datalist input{
+	width:95%!important;
+}
+
+
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td{
+	padding:0.1% 0.1%!important;
+	width:10%!important;
+	
+	
+}
+
+.ui-picklist-buttons-cell{
+	margin-top: -62px;
+}

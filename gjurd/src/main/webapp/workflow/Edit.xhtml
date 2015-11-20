@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+
+        <p:dialog id="WorkflowEditDlg" widgetVar="WorkflowEditDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.EditWorkflowTitle}">
+
+            <h:form id="WorkflowEditForm">
+
+         
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{workflowController.selected != null}">
+                    	
+	<p:outputLabel value='#{bundle.WorkflowLabel_nom}' for='nom' />
+	<p:inputText id='nom' value='#{workflowController.selected.nom}' title='#{bundle.WorkflowLabel_nom}' required='true' requiredMessage='#{bundle.WorkflowRequiredMessage_nom}'/>
+
+	<p:outputLabel value='#{bundle.WorkflowLabel_cabinet}' for='cabinet' />
+	<p:selectOneMenu id='cabinet' value='#{workflowController.selected.cabinet}' converter='#{cabinetConverter}' >
+		<f:selectItem noSelectionOption='true' itemLabel='#{bundle.SelectOneMessage}' />
+		<f:selectItems value='#{cabinetController.items}' var='item' itemValue='#{item}' itemLabel='#{item.nom}' />
+	</p:selectOneMenu>
+	<p:outputLabel value='#{bundle.WorkflowLabel_description}' for='description' />
+	<p:inputTextarea rows='2'  id='description' value='#{workflowController.selected.description}' title='#{bundle.WorkflowLabel_description}' />
+				
+    </p:panelGrid>
+                    <p:commandButton actionListener="#{workflowController.edit}" value="#{bundle.Save}" update="display,:growl,:WorkflowListForm:datalist" oncomplete="if(!args.validationFailed) {PF('WorkflowEditDialog').hide();}"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('WorkflowEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

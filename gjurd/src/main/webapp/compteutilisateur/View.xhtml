@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CompteUtilisateurViewDlg" widgetVar="CompteUtilisateurViewDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.ViewCompteUtilisateurTitle}">
+
+            <h:form id="CompteUtilisateurViewForm">
+		        <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{compteUtilisateurController.selected != null}">
+                    <p:outputLabel value='#{bundle.CompteUtilisateurLabel_login}:' />
+<h:outputText value='#{compteUtilisateurController.selected.login}' title='#{bundle.CompteUtilisateurLabel_login}'/>
+
+<p:outputLabel value='#{bundle.CompteUtilisateurLabel_password}:' />
+	<h:outputText value='#{bundle.Yes}' rendered='#{compteUtilisateurController.selected.actif}'/>
+	<h:outputText value='#{bundle.No}' rendered='#{compteUtilisateurController.selected.actif == false}'/>
+
+<p:outputLabel value='#{bundle.CompteUtilisateurLabel_datepassword}:' />
+<h:outputText value='#{compteUtilisateurController.selected.datepassword}' title='#{bundle.CompteUtilisateurLabel_datepassword}'><f:convertDateTime locale='#{changeLocale.locale}' pattern='dd/MM/yyyy'/></h:outputText>
+<p:outputLabel value='#{bundle.CompteUtilisateurLabel_utilisateur}:' />
+<h:outputText value='#{compteUtilisateurController.selected.utilisateur.libelle}' title='#{bundle.CompteUtilisateurLabel_utilisateur}'/><p:outputLabel value='#{bundle.CompteUtilisateurLabel_profile}:' />
+<h:outputText value='#{compteUtilisateurController.selected.profile.libelle}' title='#{bundle.CompteUtilisateurLabel_profile}'/>
+		         </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CompteUtilisateurViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

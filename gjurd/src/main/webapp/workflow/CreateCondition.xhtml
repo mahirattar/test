@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+
+        <p:dialog id="WorkflowCreateConditionDialog" widgetVar="WorkflowCreateConditionDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.CreateWorkflowTitle}">
+
+            <h:form id="WorkflowCreateConditionForm">
+			   <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{workflowController.condition != null}">
+						
+		<p:outputLabel value='#{bundle.ConditionLabel_attribut}' for='attribut' />
+	     <p:selectOneMenu id='attribut' value='#{workflowController.condition.attribut}' title='#{bundle.ConditionLabel_attribut}'>
+                 <f:selectItem itemValue="ETAT" itemLabel="#{bundle.ConditionAttribut_ETAT}"/>
+                 <f:selectItem itemValue="DATE_ECHEANCE" itemLabel="#{bundle.ConditionAttribut_DATE_ECHEANCE}"/>
+                 
+                  <p:ajax event="change"  update="operateur,valeur1,valeurdate,valeurattribut,typevaleur,labeltypevaleur"/> 
+         </p:selectOneMenu>
+	
+	<p:outputLabel value='#{bundle.ConditionLabel_operateur}' for='operateur' />
+	<p:selectOneMenu id='operateur' value='#{workflowController.condition.operateur}' title='#{bundle.ConditionLabel_operateur}'>
+              <f:selectItems value='#{workflowController.getOperators()}' var='item' itemValue='#{item}' itemLabel='#{item}' />
+     </p:selectOneMenu>
+
+    
+    
+    <p:outputLabel id="labeltypevaleur" value='#{bundle.ConditionLabel_typevaleur}' for='typevaleur' rendered='#{!workflowController.condition.attribut.equals("ETAT")}' />
+	 <p:selectOneMenu id='typevaleur' value='#{workflowController.condition.typevaleur}' title='#{bundle.ConditionLabel_typevaleur}' rendered='#{workflowController.condition.attribut.equals("ETAT")==false}'>
+                 <f:selectItem itemValue="DATE" itemLabel="#{bundle.ConditionTypeAttribut_DATE}"/>
+                 <f:selectItem itemValue="VALUEATTRIBUTE" itemLabel="#{bundle.ConditionTypeAttribut_VALUEATTRIBUTE}"/>
+                 
+                  <p:ajax event="change"  update="operateur,valeur1,valeurdate,valeurattribut"/> 
+         </p:selectOneMenu>
+	
+	<p:outputLabel value='#{bundle.ConditionLabel_valeur1}' for='valeur1' />
+	<h:panelGroup>
+		<p:inputText id='valeur1' value='#{workflowController.stringvaleur}' title='#{bundle.ConditionLabel_valeur1}' rendered='#{workflowController.condition.typevaleur.equals("STRING")}' />
+	
+		<p:calendar locale='#{changeLocale.locale}' pattern='dd/MM/yyyy' id='valeurdate' value='#{workflowController.datevaleur}' title='#{bundle.ConditionLabel_valeur1}' rendered='#{workflowController.condition.typevaleur.equals("DATE")}' />
+		
+	    <p:selectOneMenu id='valeurattribut' value='#{workflowController.attributevaleur}' title='#{bundle.ConditionLabel_valeur1}' rendered='#{workflowController.condition.typevaleur.equals("VALUEATTRIBUTE")}'>
+	               <f:selectItem itemValue="ETAT" itemLabel="#{bundle.ConditionAttribut_ETAT}"/>
+	               <f:selectItem itemValue="DATE_ECHEANCE" itemLabel="#{bundle.ConditionAttribut_DATE_ECHEANCE}"/>
+	    </p:selectOneMenu>
+	</h:panelGroup>
+	
+                          </p:panelGrid>
+                    <p:commandButton action="#{workflowController.createCondition}" value="#{bundle.Save}" ajax="false"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('WorkflowCreateConditionDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

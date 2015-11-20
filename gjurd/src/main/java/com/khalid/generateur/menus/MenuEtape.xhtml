@@ -1,0 +1,9 @@
+ <ui:insert name="menuetape"> 
+            <h:panelGroup rendered='#{authentification.havePrivilege("ETAPE_READ")}' >	       
+			<li ><a href="#">Etape</a>
+				<ul>
+				     <li><h:commandLink action="/etape/index" value="Etapes"/></li> 		
+                                                     	</ul>
+			</li>
+			</h:panelGroup>
+                          </ui:insert>  

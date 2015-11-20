@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//src/main/java/com/khalid/generateur=UTF-8
+encoding//src/main/java/com/khalid/generateur/properties/fr/BundleFRAction.properties=UTF-8
+encoding//src/main/java/com/khalid/generateur/properties/fr/BundleFRCabinet.properties=UTF-8
+encoding//src/main/java/com/khalid/generateur/properties/fr/BundleFRCondition.properties=UTF-8
+encoding//src/main/java/com/khalid/generateur/properties/fr/BundleFRDelimiteur.properties=UTF-8
+encoding//src/main/java/com/khalid/generateur/properties/fr/BundleFRDepartement.properties=UTF-8
+encoding//src/main/java/com/khalid/generateur/properties/fr/BundleFREtape.properties=UTF-8
+encoding//src/main/java/com/khalid/generateur/properties/fr/BundleFRWorkflow.properties=UTF-8

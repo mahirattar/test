@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="MessageListForm">
+		  <p:panel header="#{bundle.ListMessageTitle}">
+
+         
+
+            <p:dataTable id="datalist" value="#{messageController.items}" var="item"
+                         selectionMode="single" selection="#{messageController.selected}"
+                         rowKey="#{item.id}"
+                         paginator="true"
+                         rows="15"
+                          paginatorPosition="bottom"
+                          emptyMessage="#{bundle.ListMessageEmpty}"
+                        
+                         >
+
+                <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                                    	<p:column sortBy='#{item.contenu}' filterBy='#{item.contenu}'>
+		<f:facet name='header'>
+			<h:outputText value='#{bundle.MessageLabel_contenu}:' />
+		</f:facet>
+			<h:outputText value='#{item.contenu}'/>
+	</p:column>	<p:column sortBy='#{item.date}' filterBy='#{item.date}'>
+		<f:facet name='header'>
+			<h:outputText value='#{bundle.MessageLabel_date}:' />
+		</f:facet>
+			<h:outputText value='#{item.date}'> <f:convertDateTime locale='#{changeLocale.locale}' pattern='dd/MM/yyyy'/></h:outputText>
+	</p:column>	<p:column sortBy='#{item.utilisateur.libelle}' filterBy='#{item.utilisateur.libelle}'>
+		<f:facet name='header'>
+			<h:outputText value='#{bundle.MessageLabel_utilisateur}:' />
+		</f:facet>
+			<h:outputText value='#{item.utilisateur.libelle}'/>
+	</p:column>
+                               <f:facet name="footer">
+                    <p:commandButton id="createButton" rendered='#{authentification.havePrivilege("MESSAGE_ADD")}' icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{messageController.prepareCreate}" update=":MessageCreateForm:display" oncomplete="PF('MessageCreateDialog').show()"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MessageViewForm:display" oncomplete="PF('MessageViewDialog').show()" disabled="#{empty messageController.selected}"/>
+                    <p:commandButton id="editButton" rendered='#{authentification.havePrivilege("MESSAGE_EDIT")}'   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MessageEditForm:display" oncomplete="PF('MessageEditDialog').show()" disabled="#{empty messageController.selected}"/>
+                    <p:commandButton id="deleteButton" rendered='#{authentification.havePrivilege("MESSAGE_DELETE")}' icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="PF('confirmation').show()" disabled="#{empty messageController.selected}"/>
+                   </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+<p:confirmDialog id="confirmDialog" rendered='#{authentification.havePrivilege("MESSAGE_DELETE")}' message="#{bundle.MessageConfirmDelete}"  
+                header="#{bundle.ConfirmTitle}" severity="alert" widgetVar="confirmation">  
+                <div style="text-align: center;margin-top:10px;margin-bottom:10px;">  
+        <p:commandButton id="confirm" value="#{bundle.Yes}" actionListener="#{messageController.delete}" oncomplete="PF('confirmation').hide()"
+                    update=":growl,datalist" />  
+        <p:commandButton id="decline" value="#{bundle.No}" onclick="PF('confirmation').hide()" type="button" /> 
+        </div>  
+                  
+    </p:confirmDialog> 
+    </h:form>
+
+</ui:composition>

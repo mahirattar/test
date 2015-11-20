@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+
+        <p:dialog id="DelimiteurEditDlg" widgetVar="DelimiteurEditDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.EditDelimiteurTitle}">
+
+            <h:form id="DelimiteurEditForm">
+
+         
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{delimiteurController.selected != null}">
+                    	
+	<p:outputLabel value='#{bundle.DelimiteurLabel_fin}' for='fin' />
+	<p:selectBooleanCheckbox id='fin' value='#{delimiteurController.selected.fin}'  title='#{bundle.DelimiteurLabel_fin}' required='true' requiredMessage='#{bundle.DelimiteurRequiredMessage_fin}'/>
+
+					
+        </p:panelGrid>
+                    <p:commandButton actionListener="#{delimiteurController.edit}" value="#{bundle.Save}" update="display,:growl,:DelimiteurListForm:datalist" oncomplete="if(!args.validationFailed) {PF('DelimiteurEditDialog').hide();}"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('DelimiteurEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
