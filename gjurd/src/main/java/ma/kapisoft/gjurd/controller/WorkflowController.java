@@ -74,6 +74,9 @@ public class WorkflowController extends AbstractController<Workflow> {
 	
 	private static final String ATTRIBUTE_ETAT="ETAT"; 
 	
+	private static final String ATTRIBUTE_TYPE_STRING="STRING";
+	private static final String ATTRIBUTE_TYPE_DATE="DATE";
+	private static final String ATTRIBUTE_TYPE_VALUEATTRIBUTE="VALUEATTRIBUTE";
 	
 	private static final int ELEMENT_X_INIT=4;
 	private static final int ELEMENT_Y_INIT=8;
@@ -106,16 +109,6 @@ public class WorkflowController extends AbstractController<Workflow> {
     }
     
     
-    public void save()
-    {
-    	try{
-    		service.save(this.getSelected(),model);
-    		
-    	}catch(GenericException e)
-    	{
-    		
-    	}
-    }
 
     public DefaultDiagramModel getModel() {
     	if(model==null)
@@ -283,6 +276,16 @@ public class WorkflowController extends AbstractController<Workflow> {
 		}
 	}
 
+    public void save()
+    {
+    	try{
+    		service.save(this.getSelected(),model);
+    		
+    	}catch(GenericException e)
+    	{
+    		
+    	}
+    }
 
 
 	@PostConstruct
@@ -291,13 +294,27 @@ public class WorkflowController extends AbstractController<Workflow> {
    
     }
 	
-	public void test(ActionEvent event) {
-    	System.out.println("test");
+	public void changeAttribute()
+	{
+		if(condition !=null)
+		{
+			if(condition.getAttribut().equals(ATTRIBUTE_ETAT))
+			{
+				condition.setTypevaleur(ATTRIBUTE_TYPE_STRING);
+			}
+			else
+			{
+				condition.setTypevaleur(ATTRIBUTE_TYPE_DATE);
+			}
+		}
+	}
+	
 	  
-    }
+	public void deleteEtape(ActionEvent event) {
+		System.out.println("deleteEtape");
+	}
 	
-	
-	  public void prepareCreateAction(ActionEvent event) {
+	public void prepareCreateAction(ActionEvent event) {
 	    	action=new Action();
 		  
 	    }
@@ -346,6 +363,19 @@ public class WorkflowController extends AbstractController<Workflow> {
 	    
 	    	condition.setX(ELEMENT_X_INIT);
 	    	condition.setY(ELEMENT_Y_INIT);
+	    	
+	    	if(condition.getTypevaleur().equals(ATTRIBUTE_TYPE_STRING))
+	    	{
+	    		condition.setValeur(stringvaleur);
+	    	}else if(condition.getTypevaleur().equals(ATTRIBUTE_TYPE_DATE))
+	    	{
+	    		condition.setValeur(datevaleur.toString());
+	    	}
+	    	else if(condition.getTypevaleur().equals(ATTRIBUTE_TYPE_VALUEATTRIBUTE))
+	    	{
+	    		condition.setValeur(attributevaleur);
+	    	}
+	    			
 	    	
 	    	service.createCondition(condition, model);
 	    	

@@ -14,7 +14,7 @@
        <h:panelGroup rendered='#{authentification.havePrivilege("WORKFLOW_ADD")}' >	
      		<ui:include src="CreateAction.xhtml"/>
      			<ui:include src="CreateCondition.xhtml"/>
-     				<ui:include src="CreateEtapeFin.xhtml"/>
+     				
      	  </h:panelGroup>	 
  	 <h:form>
  	<p:commandButton id="createButton" rendered='#{authentification.havePrivilege("WORKFLOW_ADD")}' icon="ui-icon-plus"   value="#{bundle.CreateAction}" actionListener="#{workflowController.prepareCreateAction}" update=":WorkflowCreateActionForm:display" oncomplete="PF('WorkflowCreateActionDialog').show()"/>
@@ -25,21 +25,28 @@
   
    
        <p:remoteCommand name="diagram_onNodeMove" actionListener="#{workflowController.onNodeMove}" />
-    </h:form>
+  
     <p:diagram id="diagram" value="#{workflowController.model}" style="height:600px" styleClass="ui-widget-content" var="el">
-  		<f:facet name="element">
-  			 <div onmouseleave="node_onMouseOut(this)">
+  		<f:facet name="element" >
+  			 <h:panelGroup onmouseleave="node_onMouseOut(this)"  id="diagramelement">
 	            <h:outputText value="#{el.name}" rendered='#{el.haveimage==false}' />
 	            <p:graphicImage url="/resources/images/#{el.image}" rendered='#{el.haveimage}' />
-	            </div>
+	            </h:panelGroup>
+		
         </f:facet>
+         
         <p:ajax event="connect" listener="#{workflowController.onConnect}" />
         <p:ajax event="disconnect" listener="#{workflowController.onDisconnect}" />
         <p:ajax event="connectionChange" listener="#{workflowController.onConnectionChange}" />
  
     </p:diagram>
  
- 
+
+	<p:contextMenu for="diagramelement">
+
+        <p:menuitem icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{workflowController.deleteEtape}"/>
+        </p:contextMenu>
+    </h:form>
 
 <style type="text/css">
     .ui-diagram-element {   

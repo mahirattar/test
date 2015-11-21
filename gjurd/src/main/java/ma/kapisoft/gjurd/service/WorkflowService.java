@@ -286,15 +286,15 @@ public class WorkflowService extends AbstractService<Workflow> implements IWorkf
           endPointSA.setTarget(true);
           element.addEndPoint(endPointSA);
 
-
-          
-          EndPoint endPointCA = createRectangleEndPoint(EndPointAnchor.LEFT);
+          EndPoint endPointCA = createRectangleEndPoint(EndPointAnchor.RIGHT);
           endPointCA.setSource(true);
           element.addEndPoint(endPointCA);
           
-           endPointCA = createRectangleEndPoint(EndPointAnchor.RIGHT);
+           endPointCA = createRectangleEndPoint(EndPointAnchor.LEFT);
           endPointCA.setSource(true);
           element.addEndPoint(endPointCA);
+          
+         
           element.setStyleClass("classcondition");
           
           
@@ -379,7 +379,6 @@ public class WorkflowService extends AbstractService<Workflow> implements IWorkf
 			Etape et=etelement.getEtape();
 			int x=Integer.parseInt(e.getX().substring(0,e.getX().length()-2));
 			int y=Integer.parseInt(e.getY().substring(0,e.getY().length()-2));
-			log.error(e.getX()+"    "+e.getY());
 			et.setX(x);
 			et.setY(y);
 			et.setWorkflow(selected);
