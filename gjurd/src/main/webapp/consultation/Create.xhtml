@@ -16,77 +16,13 @@
 				<p:panelGrid columns="2"
 					rendered="#{consultationController.selected != null}">
 
-					<p:outputLabel value='#{bundle.ConsultationLabel_email}'
-						for='email' />
-					<p:inputText id='email'
-						value='#{consultationController.selected.email}'
-						title='#{bundle.ConsultationLabel_email}' required='true'
-						requiredMessage='#{bundle.ConsultationRequiredMessage_email}' />
-
-
-					<p:outputLabel value='#{bundle.ConsultationLabel_nom}' for='nom' />
-					<p:inputText id='nom'
-						value='#{consultationController.selected.nom}'
-						title='#{bundle.ConsultationLabel_nom}' />
-
-
-					<p:outputLabel value='#{bundle.ConsultationLabel_prenom}'
-						for='prenom' />
-					<p:inputText id='prenom'
-						value='#{consultationController.selected.prenom}'
-						title='#{bundle.ConsultationLabel_prenom}' />
-
-
-					<p:outputLabel value='#{bundle.ConsultationLabel_tel}' for='tel' />
-					<p:inputText id='tel'
-						value='#{consultationController.selected.tel}'
-						title='#{bundle.ConsultationLabel_tel}' />
-
-
 					<p:outputLabel value='#{bundle.ConsultationLabel_question}'
 						for='question' />
-					<p:inputText id='question'
+					<p:inputTextarea id='question'
 						value='#{consultationController.selected.question}'
 						title='#{bundle.ConsultationLabel_question}' required='true'
 						requiredMessage='#{bundle.ConsultationRequiredMessage_question}' />
 
-
-					<p:outputLabel value='#{bundle.ConsultationLabel_cloture}'
-						for='cloture' />
-					<p:selectBooleanCheckbox id='cloture'
-						value='#{consultationController.selected.cloture}'
-						title='#{bundle.ConsultationLabel_cloture}' />
-
-
-					<p:outputLabel value='#{bundle.ConsultationLabel_datecreation}'
-						for='datecreation' />
-					<p:calendar locale='#{changeLocale.locale}' id='datecreation'
-						value='#{consultationController.selected.datecreation}'
-						pattern='dd/MM/yyyy'
-						title='#{bundle.ConsultationLabel_datecreation}' />
-
-
-					<p:outputLabel value='#{bundle.ConsultationLabel_datecloture}'
-						for='datecloture' />
-					<p:calendar locale='#{changeLocale.locale}' id='datecloture'
-						value='#{consultationController.selected.datecloture}'
-						pattern='dd/MM/yyyy'
-						title='#{bundle.ConsultationLabel_datecloture}' />
-
-
-					<p:outputLabel value='#{bundle.ConsultationLabel_utilisateur}'
-						for='utilisateur' />
-					<p:selectOneMenu id='utilisateur'
-						value='#{consultationController.selected.utilisateur}'
-						converter='#{utilisateurConverter}'>
-						<f:selectItem noSelectionOption='true'
-							itemLabel='#{bundle.SelectOneMessage}' />
-						<f:selectItems value='#{utilisateurController.items}' var='item'
-							itemValue='#{item}' itemLabel='#{item.libelle}' />
-					</p:selectOneMenu>
-
-
-				
 				</p:panelGrid>
 				<p:commandButton actionListener="#{consultationController.create}"
 					value="#{bundle.Save}"

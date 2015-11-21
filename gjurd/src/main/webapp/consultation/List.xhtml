@@ -8,9 +8,6 @@
 
 	<h:form id="ConsultationListForm">
 		<p:panel header="#{bundle.ListConsultationTitle}">
-
-
-
 			<p:dataTable id="datalist" value="#{consultationController.items}"
 				var="item" selectionMode="single"
 				selection="#{consultationController.selected}" rowKey="#{item.id}"
@@ -21,35 +18,19 @@
 					update="createButton viewButton editButton deleteButton" />
 				<p:ajax event="rowUnselect"
 					update="createButton viewButton editButton deleteButton" />
-				<p:column sortBy='#{item.email}' filterBy='#{item.email}'>
-					<f:facet name='header'>
-						<h:outputText value='#{bundle.ConsultationLabel_email}:' />
-					</f:facet>
-					<h:outputText value='#{item.email}' />
-				</p:column>
-				<p:column sortBy='#{item.nom}' filterBy='#{item.nom}'>
-					<f:facet name='header'>
-						<h:outputText value='#{bundle.ConsultationLabel_nom}:' />
-					</f:facet>
-					<h:outputText value='#{item.nom}' />
-				</p:column>
-				<p:column sortBy='#{item.prenom}' filterBy='#{item.prenom}'>
-					<f:facet name='header'>
-						<h:outputText value='#{bundle.ConsultationLabel_prenom}:' />
-					</f:facet>
-					<h:outputText value='#{item.prenom}' />
-				</p:column>
-				<p:column sortBy='#{item.tel}' filterBy='#{item.tel}'>
-					<f:facet name='header'>
-						<h:outputText value='#{bundle.ConsultationLabel_tel}:' />
-					</f:facet>
-					<h:outputText value='#{item.tel}' />
-				</p:column>
 				<p:column sortBy='#{item.question}' filterBy='#{item.question}'>
 					<f:facet name='header'>
 						<h:outputText value='#{bundle.ConsultationLabel_question}:' />
 					</f:facet>
 					<h:outputText value='#{item.question}' />
+				</p:column>
+				<p:column sortBy='#{item.cloture}'>
+					<f:facet name='header'>
+						<h:outputText value='#{bundle.ConsultationLabel_cloture}:' />
+					</f:facet>
+					<h:outputText value='#{bundle.Yes}' rendered='#{item.cloture}' />
+					<h:outputText value='#{bundle.No}'
+						rendered='#{item.cloture == false}' />
 				</p:column>
 				<p:column sortBy='#{item.datecreation}'
 					filterBy='#{item.datecreation}'>
@@ -70,13 +51,6 @@
 						<f:convertDateTime locale='#{changeLocale.locale}'
 							pattern='dd/MM/yyyy' />
 					</h:outputText>
-				</p:column>
-				<p:column sortBy='#{item.utilisateur.libelle}'
-					filterBy='#{item.utilisateur.libelle}'>
-					<f:facet name='header'>
-						<h:outputText value='#{bundle.ConsultationLabel_utilisateur}:' />
-					</f:facet>
-					<h:outputText value='#{item.utilisateur.libelle}' />
 				</p:column>
 				<f:facet name="footer">
 					<p:commandButton id="createButton"
@@ -100,6 +74,10 @@
 						icon="ui-icon-trash" value="#{bundle.Delete}"
 						onclick="PF('confirmation').show()"
 						disabled="#{empty consultationController.selected}" />
+					<p:commandButton id="refreshButton" icon="ui-icon-refresh"
+						value="#{bundle.Refresh}"
+						actionListener="#{consultationController.initList()}"
+						update="datalist" />
 				</f:facet>
 
 			</p:dataTable>

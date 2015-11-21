@@ -1,58 +1,64 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition>
+<ui:composition>
 
-        <p:dialog id="ConsultationViewDlg" widgetVar="ConsultationViewDialog" modal="true" resizable="false" appendToBody="true" header="#{bundle.ViewConsultationTitle}">
+	<p:dialog id="ConsultationViewDlg" widgetVar="ConsultationViewDialog"
+		modal="true" resizable="false" appendToBody="true"
+		header="#{bundle.ViewConsultationTitle}">
 
-            <h:form id="ConsultationViewForm">
-		        <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{consultationController.selected != null}">
-                    
-	<p:outputLabel value='#{bundle.ConsultationLabel_email}:' />
-	<h:outputText value='#{consultationController.selected.email}' title='#{bundle.ConsultationLabel_email}'/>
+		<h:form id="ConsultationViewForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2"
+					rendered="#{consultationController.selected != null}">
 
-	<p:outputLabel value='#{bundle.ConsultationLabel_nom}:' />
-	<h:outputText value='#{consultationController.selected.nom}' title='#{bundle.ConsultationLabel_nom}'/>
+					<p:outputLabel value='#{bundle.ConsultationLabel_question}:' />
+					<h:outputText value='#{consultationController.selected.question}'
+						title='#{bundle.ConsultationLabel_question}' />
 
-	<p:outputLabel value='#{bundle.ConsultationLabel_prenom}:' />
-	<h:outputText value='#{consultationController.selected.prenom}' title='#{bundle.ConsultationLabel_prenom}'/>
+					<p:outputLabel value='#{bundle.ConsultationLabel_cloture}:' />
 
-	<p:outputLabel value='#{bundle.ConsultationLabel_tel}:' />
-	<h:outputText value='#{consultationController.selected.tel}' title='#{bundle.ConsultationLabel_tel}'/>
+					<h:panelGroup>
 
-	<p:outputLabel value='#{bundle.ConsultationLabel_question}:' />
-	<h:outputText value='#{consultationController.selected.question}' title='#{bundle.ConsultationLabel_question}'/>
+						<h:outputText value='#{bundle.Yes}'
+							rendered='#{consultationController.selected.cloture}' />
 
-	<p:outputLabel value='#{bundle.ConsultationLabel_cloture}:' />
-	<h:outputText value='#{consultationController.selected.cloture}' title='#{bundle.ConsultationLabel_cloture}'/>			<h:outputText value='#{bundle.Yes}' rendered='#{consultationController.selected.cloture}'/>
-			<h:outputText value='#{bundle.No}' rendered='#{consultationController.selected.cloture == false}'/>
+						<h:outputText value='#{bundle.No}'
+							rendered='#{consultationController.selected.cloture == false}' />
 
-
-	<p:outputLabel value='#{bundle.ConsultationLabel_datecreation}:' />
-	<h:outputText value='#{consultationController.selected.datecreation}' title='#{bundle.ConsultationLabel_datecreation}'><f:convertDateTime locale='#{changeLocale.locale}' pattern='dd/MM/yyyy'/></h:outputText>
+					</h:panelGroup>
 
 
-	<p:outputLabel value='#{bundle.ConsultationLabel_datecloture}:' />
-	<h:outputText value='#{consultationController.selected.datecloture}' title='#{bundle.ConsultationLabel_datecloture}'><f:convertDateTime locale='#{changeLocale.locale}' pattern='dd/MM/yyyy'/></h:outputText>
+					<p:outputLabel value='#{bundle.ConsultationLabel_datecreation}:' />
+					<h:outputText
+						value='#{consultationController.selected.datecreation}'
+						title='#{bundle.ConsultationLabel_datecreation}'>
+						<f:convertDateTime locale='#{changeLocale.locale}'
+							pattern='dd/MM/yyyy' />
+					</h:outputText>
 
 
-	<p:outputLabel value='#{bundle.ConsultationLabel_utilisateur}:' />
-	<h:outputText value='#{consultationController.selected.utilisateur.libelle}' title='#{bundle.ConsultationLabel_utilisateur}'/>
+					<p:outputLabel value='#{bundle.ConsultationLabel_datecloture}:' />
+					<h:outputText
+						value='#{consultationController.selected.datecloture}'
+						title='#{bundle.ConsultationLabel_datecloture}'>
+						<f:convertDateTime locale='#{changeLocale.locale}'
+							pattern='dd/MM/yyyy' />
+					</h:outputText>
+				</p:panelGrid>
+				<p:commandButton value="#{bundle.Close}"
+					onclick="ConsultationViewDialog.hide()" />
+			</h:panelGroup>
 
-		         </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="ConsultationViewDialog.hide()"/>
-                </h:panelGroup>
+		</h:form>
 
-            </h:form>
+	</p:dialog>
 
-        </p:dialog>
-
-    </ui:composition>
+</ui:composition>
 
 </html>
