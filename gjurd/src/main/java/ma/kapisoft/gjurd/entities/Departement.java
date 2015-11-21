@@ -17,6 +17,10 @@ import javax.persistence.UniqueConstraint;
 	    @UniqueConstraint(columnNames = {"nom"})})
 public class Departement {
 
+	public static final String SERVICE_JURIQIQUE="Service juridique";
+	
+	
+	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
    private Integer id; 
